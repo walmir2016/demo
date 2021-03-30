@@ -4,6 +4,7 @@ plugins {
 	id 'java'
 	id 'war'
 	id "org.sonarqube" version "3.1.1"
+	id "io.snyk.gradle.plugin.snykplugin" version "0.4"
 }
 
 sonarqube {
@@ -12,7 +13,16 @@ sonarqube {
 		property "sonar.organization", "fvilarinho"
 		property "sonar.host.url", "https://sonarcloud.io"
 		property "sonar.sources", "src/main/java,src/main/webapp"
+		property "sonar.buildbreaker.skip", false
+		property "sonar.qualitygate", true
 	}
+}
+
+snyk {
+	severity = 'low'
+	autoDownload = true
+	autoUpdate = true
+	arguments = '--all-projects'
 }
 
 group = 'com.example'

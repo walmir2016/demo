@@ -9,6 +9,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <title>Phonebook Application</title>
     <jsp:include page="header.jsp"/>
 </head>
 <body>

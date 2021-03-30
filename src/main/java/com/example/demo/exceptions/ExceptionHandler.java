@@ -1,8 +1,5 @@
 package com.example.demo.exceptions;
 
-import antlr.StringUtils;
-import com.example.demo.exceptions.ItemAlreadyExistsException;
-import com.example.demo.exceptions.PermissionDeniedException;
 import com.example.demo.service.PhonebookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -33,7 +30,7 @@ public class ExceptionHandler{
     public String handleViolations(Model model, HttpServletRequest request, ConstraintViolationException ex){
         Set<ConstraintViolation<?>> violations = ex.getConstraintViolations();
         
-        for(ConstraintViolation violation: violations){
+        for(ConstraintViolation<?> violation: violations){
             String messageId = violation.getPropertyPath().toString().replaceAll("save.", "").concat("Message");
             String messageValue = violation.getMessage();
             

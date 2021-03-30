@@ -9,6 +9,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <title>Phonebook Application</title>
     <jsp:include page="header.jsp"/>
 </head>
 <body>
@@ -16,7 +17,7 @@
     <jsp:include page="title.jsp"/>
     <form action="save" method="POST">
         <input type="hidden" name="id" value="${id}"/>
-        <div class="col-md-5">
+        <div class="col-md-3">
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" class="form-control" value="${name}"/>

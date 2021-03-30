@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PhonebookService{
@@ -13,7 +14,12 @@ public class PhonebookService{
     private PhonebookPersistence persistence;
     
     public Phonebook findById(Integer id){
-        return persistence.findById(id).get();
+        Optional<Phonebook> result = persistence.findById(id);
+        
+        if(result.isPresent())
+            return result.get();
+        
+        return null;
     }
     
     public List<Phonebook> findByName(String name){

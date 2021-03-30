@@ -18,7 +18,7 @@ jobs:
       with:
         java-version: 1.8
     - name: Grant execute permission
-      run: chmod +x gradlew; chmod +x *.sh
+      run: chmod +x gradlew; chmod +x *.sh; echo ${{ github.ref }}
     - name: Build with Gradle
       run: ./gradlew build
     - name: Build docker image

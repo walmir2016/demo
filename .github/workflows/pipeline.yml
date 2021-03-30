@@ -23,3 +23,5 @@ jobs:
       run: ./gradlew build
     - name: Build docker image
       run: ./build.sh
+    - name: Publish docker image
+      run: ./publish.sh

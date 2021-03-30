@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demo
+spec:
+  containers:
+  - name: demo
+    image: ghcr.io/fvilarinho/demo:latest
+    ports:
+      - containerPort: 8080
+        hostPort: 80
+  imagePullSecrets:
+  - name: github

@@ -1,3 +1,5 @@
 #!/bin/bash
 
-docker build -t $DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/demo .
+gradlew clean build sonarqube --info
+
+docker build -t ghcr.io/fvilarinho/demo:latest .

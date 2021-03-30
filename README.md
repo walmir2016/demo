@@ -1,5 +1,7 @@
 # Getting Started
 
+This is a demo project for multiple purposes.
+
 ### Reference Documentation
 For further reference, please consider the following sections:
 

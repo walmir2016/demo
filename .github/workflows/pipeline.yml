@@ -20,20 +20,12 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
-  packaging:
+  packaging and publishing:
     needs: build
     runs-on: ubuntu-latest
     steps:
     - name: Build Docker Image
       uses: docker/build-push-action@v2.3.0
       with:
-        tags: fvilarinho/demo
-  publishing:
-    needs: packaging
-    runs-on: ubuntu-latest
-    steps:
-    - name: Publish Docker Image
-      uses: docker/build-push-action@v2.3.0
-      with:
         push: true
-        tags: fvilarinho/demo
+        tags: ghcr.io/fvilarinho/demo

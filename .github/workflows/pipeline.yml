@@ -7,6 +7,10 @@ on:
 jobs:
   run:
     runs-on: ubuntu-latest
+    env:
+      DOCKER_REGISTRY_URL: ${{ secrets.DOCKER_REGISTRY_URL }}
+      DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+      DOCKER_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 1.8

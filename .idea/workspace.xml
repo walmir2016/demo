@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="cf338367-3ecf-486a-a86c-1480a5c46018" name="Default Changelist" comment="Tests">
       <change beforePath="$PROJECT_DIR$/.github/workflows/pipeline.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/pipeline.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,7 +179,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1617055858077</updated>
-      <workItem from="1617055859327" duration="27418000" />
+      <workItem from="1617055859327" duration="27631000" />
     </task>
     <task id="LOCAL-00001" summary="Tests">
       <created>1617130485071</created>
@@ -189,7 +188,21 @@
       <option name="project" value="LOCAL" />
       <updated>1617130485071</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Tests">
+      <created>1617130612858</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1617130612858</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Tests">
+      <created>1617130657623</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1617130657623</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -20,7 +20,7 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
-  packaging and publishing:
+  packaging:
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -29,3 +29,4 @@ jobs:
       with:
         push: true
         tags: ghcr.io/fvilarinho/demo
+        

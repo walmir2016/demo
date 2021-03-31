@@ -5,5 +5,7 @@ services:
     build:
       context: .
     image: ghcr.io/fvilarinho/demo:latest
+    ports:
+      - 8080:8080
     container_name: demo
     hostname: demo

@@ -3,6 +3,10 @@
 This is a demo project for education/training purposes of DevOps.
 It contains a pipeline that contains the following phases:
 
+[![Pipeline](https://github.com/fvilarinho/demo/actions/workflows/pipeline.yml/badge.svg)](https://github.com/fvilarinho/demo/actions/workflows/pipeline.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fvilarinho_demo&metric=alert_status)](https://sonarcloud.io/dashboard?id=fvilarinho_demo)
+
+
 ### 1. Compile and White Box Testing (SAST - Static Application Security Testing)
 It uses:
 - [Gradle](https://www.gradle.org) for project automation (Compile and orchestration of the execution of the code analysis).

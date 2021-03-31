@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
 jobs:
-  run:
+  build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -12,27 +12,31 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 11
-
     - name: Grant permissions
       run: chmod +x gradlew; chmod +x *.sh
-
     - name: Build
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: ./build.sh
-
     - name: Packaging
       run: ./package.sh
-
     - name: Publishing
       env:
         DOCKER_REGISTRY_URL: ${{ secrets.DOCKER_REGISTRY_URL }}
         DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
         DOCKER_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
       run: ./publish.sh
-
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: danielr1996/kubectl-action@1.0.0
+      name: Clear cluster
+      with:
+        kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}
+        args: delete pods --all
     - uses: danielr1996/kubectl-action@1.0.0
       name: Deploy
       with:

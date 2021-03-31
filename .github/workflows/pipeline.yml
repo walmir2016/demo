@@ -18,11 +18,11 @@ jobs:
       with:
         java-version: 11
 
-    - name: Grant execute permission
+    - name: Grant permissions
       run: chmod +x gradlew; chmod +x *.sh
 
-    - name: Build
-      run: ./build.sh
-
-    - name: Publish
-      run: ./publish.sh
+    - name: Compile, Code Analysis and Build
+      run: ./gradlew build sonarqube
+      
+    - name: Packaging and Publishing
+      uses: docker/build-push-action@v2.3.0

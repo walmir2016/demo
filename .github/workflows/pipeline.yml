@@ -7,7 +7,9 @@ jobs:
   run:
     runs-on: ubuntu-latest
     env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      DOCKER_REGISTRY_URL: ${{ secrets.DOCKER_REGISTRY_URL }}
+      DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+      DOCKER_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     steps:
@@ -18,8 +20,8 @@ jobs:
         java-version: 11
     - name: Grant permissions
       run: chmod +x gradlew; chmod +x *.sh
-    - name: Compile and Code Analysis
-      run: ./gradlew clean build sonarqube snyk-monitor
+    - name: Build
+      run: ./build.sh
     - name: Packaging
       run: ./package.sh
     - name: Publishing

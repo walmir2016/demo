@@ -22,7 +22,4 @@ jobs:
       run: chmod +x gradlew; chmod +x *.sh
 
     - name: Compile, Code Analysis and Build
-      run: ./gradlew build sonarqube
-      
-    - name: Packaging and Publishing
-      uses: docker/build-push-action@v2.3.0
+      run: ./build.sh

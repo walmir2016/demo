@@ -17,11 +17,12 @@ It uses:
 - [GitHub Packages](https://github.com/features/packages) to store the versions of the container image.
 
 ### 4. Deploy
-It Used:
+It uses:
 - [Linode](https://www.linode.com) as Cloud infrastructure that runs the [Kubernetes](https://kubernetes.io) cluster.
 - [kubectl] as command line tool to orchestrate the deployments of the containers in the [Kubernetes](https://kubernetes.io) cluster.
 
 ### 5. Black Box Testing (DAST - Dynamic Application Security Testing / RASP - Runtime Application Self Protection)
+After the deployment, the scanner can be started for DAST and RASP tests.
 - [Contrast Security](https://www.contrastsecurity.com) injecting an agent to capture/block the vulnerabilities from a scanner.
 - [Probely](https://probely.com) as vulnerability scanner.
 
@@ -30,6 +31,7 @@ If any phases got errors or violations, the pipeline stops.
 # Roadmap
 - Add integration with Slack for notifications.
 - Add integration with GitHub for ticket control.
+- Add integration with Probely and Contrast APIs to automate the scanning.
 
 # Architecture
 The application was developed using Java, Spring, H2 Database and Docker. Check the documentation below.

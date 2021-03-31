@@ -1,4 +1,5 @@
 #!/bin/bash
 
-docker login -u fvilarinho -p $GITHUB_TOKEN ghcr.io
-docker push ghcr.io/fvilarinho/demo:latest
+echo $GITHUB_TOKEN | docker login -u fvilarinho ghcr.io --password-stdin
+
+docker-compose push

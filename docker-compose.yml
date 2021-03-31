@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  demo:
+    build:
+      context: .
+    image: ghcr.io/fvilarinho/demo:latest
+    container_name: demo
+    hostname: demo

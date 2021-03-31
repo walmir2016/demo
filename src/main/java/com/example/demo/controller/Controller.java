@@ -4,15 +4,19 @@ import com.example.demo.exceptions.ItemAlreadyExistsException;
 import com.example.demo.exceptions.PermissionDeniedException;
 import com.example.demo.model.Phonebook;
 import com.example.demo.service.PhonebookService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.ws.rs.Consumes;
+import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.List;
 
@@ -24,6 +28,8 @@ import java.util.List;
 @org.springframework.stereotype.Controller
 @Validated
 public class Controller{
+    private static final ObjectMapper mapper = new ObjectMapper();
+    
     @Autowired
     private PhonebookService service;
     
@@ -115,5 +121,19 @@ public class Controller{
         model.addAttribute("phone", phonebook.getPhone());
 
         return "form";
+    }
+    
+    @PostMapping("/log")
+    public String log(@RequestBody String body){
+        try{
+            Object object = mapper.readValue(body, Object.class);
+            
+            System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(object));
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        
+        return "blank";
     }
 }

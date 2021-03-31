@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +17,8 @@ public class Phonebook{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    
+    @Length(max = 1000)
     private String name;
     private String phone;
     private String owner;

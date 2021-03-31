@@ -19,7 +19,7 @@ jobs:
     - name: Grant permissions
       run: chmod +x gradlew; chmod +x *.sh
     - name: Compile and Code Analysis
-      run: ./gradlew clean build sonarqube snyk-test
+      run: ./gradlew clean build sonarqube snyk-monitor
     - name: Packaging
       run: ./package.sh
     - name: Publishing

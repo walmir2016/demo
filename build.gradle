@@ -1,3 +1,4 @@
+// Required gradle plugins.
 plugins {
 	id 'org.springframework.boot' version '2.4.4'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
@@ -7,6 +8,7 @@ plugins {
 	id "io.snyk.gradle.plugin.snykplugin" version "0.4"
 }
 
+// Sonarcloud attributes.
 sonarqube {
 	properties {
 		property "sonar.projectKey", "fvilarinho_demo"
@@ -18,6 +20,7 @@ sonarqube {
 	}
 }
 
+// Snyk attributes.
 snyk {
 	severity = 'low'
 	autoDownload = true
@@ -25,14 +28,17 @@ snyk {
 	arguments = '--all-projects'
 }
 
+// Build attributes.
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
+// Default dependencies repository.
 repositories {
 	mavenCentral()
 }
 
+// List of dependencies.
 dependencies {
 	implementation "org.springframework.boot:spring-boot-starter-data-jpa"
 	implementation "org.springframework.boot:spring-boot-starter-jersey"
@@ -45,6 +51,7 @@ dependencies {
 	testImplementation "org.springframework.boot:spring-boot-starter-test"
 }
 
+// Default test platform.
 test {
 	useJUnitPlatform()
 }

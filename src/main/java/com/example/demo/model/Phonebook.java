@@ -5,6 +5,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * Class that defines the data model.
+ *
+ * @author fvilarinho
+ */
 @Entity(name = "phonebook")
 public class Phonebook{
     @Id

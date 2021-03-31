@@ -11,6 +11,11 @@ import javax.validation.ConstraintViolationException;
 import java.util.Enumeration;
 import java.util.Set;
 
+/**
+ * Class that handles the exceptions and violations from the controller.
+ *
+ * @author fvilarinho
+ */
 @ControllerAdvice
 public class ExceptionHandler{
     @Autowired
@@ -26,6 +31,7 @@ public class ExceptionHandler{
         }
     }
     
+    // Handles violations of the form.
     @org.springframework.web.bind.annotation.ExceptionHandler(ConstraintViolationException.class)
     public String handleViolations(Model model, HttpServletRequest request, ConstraintViolationException ex){
         Set<ConstraintViolation<?>> violations = ex.getConstraintViolations();
@@ -42,6 +48,7 @@ public class ExceptionHandler{
         return "form";
     }
     
+    // When an user tries to edit/delete data from another user.
     @org.springframework.web.bind.annotation.ExceptionHandler(PermissionDeniedException.class)
     public String handlePermissionDenied(Model model, HttpServletRequest request, PermissionDeniedException ex){
         model.addAttribute("permissionDeniedMessage", "You can't edit or delete this data!");
@@ -53,6 +60,7 @@ public class ExceptionHandler{
         return "search";
     }
     
+    // When the data already exists.
     @org.springframework.web.bind.annotation.ExceptionHandler(ItemAlreadyExistsException.class)
     public String handleItemAlreadyExists(Model model, HttpServletRequest request, ItemAlreadyExistsException ex){
         model.addAttribute("nameMessage", "This item already exists!");

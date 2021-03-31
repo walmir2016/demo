@@ -5,10 +5,14 @@ import com.example.demo.persistence.PhonebookPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.inject.Inject;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Class that defines the services with the business rules.
+ *
+ * @author fvilarinho
+ */
 @Service
 public class PhonebookService{
     @Autowired

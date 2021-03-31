@@ -16,12 +16,18 @@ import javax.validation.constraints.NotNull;
 import java.security.SecureRandom;
 import java.util.List;
 
+/**
+ * Class that defines the HTTP endpoints.
+ *
+ * @author fvilarinho
+ */
 @org.springframework.stereotype.Controller
 @Validated
 public class Controller{
     @Autowired
     private PhonebookService service;
     
+    // Endpoint for search data.
     @PostMapping("/search")
     public void search(Model model,
                        @RequestParam(value = "q", required = false) String q){
@@ -33,6 +39,7 @@ public class Controller{
         model.addAttribute("result", service.findByNameContaining(q));
     }
     
+    // Endpoint to save (new or existent) data.
     @PostMapping("/save")
     public String save(Model model,
                        HttpServletRequest request,
@@ -64,6 +71,7 @@ public class Controller{
         return "search";
     }
    
+    // Endpoint to delete data.
     @PostMapping("/delete")
     public String delete(Model model,
                          HttpServletRequest request,
@@ -81,6 +89,7 @@ public class Controller{
         return "search";
     }
     
+    // Endpoint to add a new data.
     @PostMapping("/add")
     public String add(Model model){
         model.addAttribute("id", null);
@@ -90,6 +99,7 @@ public class Controller{
         return "form";
     }
     
+    // Endpoint to edit an existing data.
     @PostMapping("/edit")
     public String edit(Model model,
                        HttpServletRequest request,

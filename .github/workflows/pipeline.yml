@@ -18,11 +18,14 @@ jobs:
       with:
         java-version: 11
 
-    - name: Grant execute permission
+    - name: Grant permissions
       run: chmod +x gradlew; chmod +x *.sh
 
-    - name: Build
-      run: ./build.sh
+    - name: Compile and Code Analysis
+      run: ./gradlew clean build sonarqube snyk-test
 
-    - name: Publish
+    - name: Packaging
+      run: ./package.sh
+
+    - name: Publishing
       run: ./publish.sh

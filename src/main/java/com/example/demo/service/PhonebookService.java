@@ -5,6 +5,7 @@ import com.example.demo.persistence.PhonebookPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.inject.Inject;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,10 @@ import java.util.Optional;
 public class PhonebookService{
     @Autowired
     private PhonebookPersistence persistence;
+    
+    public List<Phonebook> list(){
+        return persistence.findAll();
+    }
     
     public Phonebook findById(Integer id){
         Optional<Phonebook> result = persistence.findById(id);

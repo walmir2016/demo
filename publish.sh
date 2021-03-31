@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker push ghcr.io/fvilarinho/demo:latest .
+docker push ghcr.io/fvilarinho/demo:latest

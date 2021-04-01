@@ -15,10 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.ws.rs.Consumes;
 import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Class that defines the HTTP endpoints.
@@ -29,6 +30,7 @@ import java.util.List;
 @Validated
 public class Controller{
     private static final ObjectMapper mapper = new ObjectMapper();
+    private static final Logger logger = Logger.getLogger(Controller.class.getName());
     
     @Autowired
     private PhonebookService service;
@@ -128,10 +130,10 @@ public class Controller{
         try{
             Object object = mapper.readValue(body, Object.class);
             
-            System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(object));
+            logger.log(Level.INFO, "{0}", mapper.writerWithDefaultPrettyPrinter().writeValueAsString(object));
         }
         catch(IOException e){
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Something wrong happened: {0}, ", e.getMessage());
         }
         
         return "blank";

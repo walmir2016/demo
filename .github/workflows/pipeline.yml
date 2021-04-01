@@ -29,6 +29,8 @@ jobs:
       run: ./build.sh
 
     - name: Packaging
+      env:
+        CONTRAST_CONFIG_DATA: ${{ secrets.CONTRAST_CONFIG_DATA }}
       run: ./package.sh
 
     - name: Publishing

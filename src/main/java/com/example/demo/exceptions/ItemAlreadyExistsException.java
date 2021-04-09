@@ -5,5 +5,5 @@ package com.example.demo.exceptions;
  *
  * @author fvilarinho
  */
-public class ItemAlreadyExistsException extends Throwable{
+public class ItemAlreadyExistsException extends Exception{
 }

@@ -63,7 +63,7 @@ public class Controller{
             if(items != null && !items.isEmpty())
                 throw new ItemAlreadyExistsException();
 
-            phonebook.setId((int)(Math.random() * 99999));
+            phonebook.setId(new SecureRandom().nextInt());
             phonebook.setOwner(request.getRemoteAddr());
         }
         else

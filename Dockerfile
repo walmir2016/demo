@@ -3,7 +3,7 @@ FROM alpine:latest
 
 # Define the Apache Tomcat version to be used.
 ARG TOMCAT_MAJOR_VERSION=9
-ARG TOMCAT_MINOR_VERSION=0.44
+ARG TOMCAT_MINOR_VERSION=0.45
 ARG TOMCAT_VERSION=${TOMCAT_MAJOR_VERSION}.${TOMCAT_MINOR_VERSION}
 
 # Install essential packages.

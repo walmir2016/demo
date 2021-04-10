@@ -28,11 +28,11 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: ./build.sh
       
-    - name: Snyk
+    - name: Snyk CLI Action
+      uses: clarkio/snyk-cli-action@1.0.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-      uses: snyk/actions@0.3.0
       
     - name: Packaging
       env:

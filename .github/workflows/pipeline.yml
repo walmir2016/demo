@@ -46,7 +46,7 @@ jobs:
     - name: Package Analysis (Snyk)
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-      run: ./snyk-linux container test fvilarinho/demo:latest
+      run: ./snyk-linux container monitor fvilarinho/demo:latest
 
     - name: Publishing (Github Packages)
       env:

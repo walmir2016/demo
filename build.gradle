@@ -14,7 +14,6 @@ sonarqube {
 		property "sonar.projectKey", "fvilarinho_demo"
 		property "sonar.organization", "fvilarinho"
 		property "sonar.host.url", "https://sonarcloud.io"
-		property "sonar.branch", "main"
 		property "sonar.sources", "src/main/java,src/main/webapp,src/main/resources/static"
 	}
 }

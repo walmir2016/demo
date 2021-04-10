@@ -29,7 +29,7 @@ jobs:
       run: ./build.sh
       
     - name:  Test
-      run: npm install -g snyk
+      run: npm install snyk
 
     - name: Packaging
       env:

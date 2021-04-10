@@ -26,12 +26,12 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: ./build.sh
       
-    - name: Code analysis
-      uses: jkumar19/sonar-build-breaker@3.0.0
+    - name: Code Analysis
+      uses: kitabisa/sonarqube-action@v1.1.0
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       with:
-        project_key: fvilarinho_demo
-        sonar_token: ${{ secrets.SONAR_TOKEN }}
-        sonar_url: https://sonarcloud.io
+        host: https://sonarcloud.io
 
     - name: Packaging
       env:

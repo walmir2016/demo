@@ -83,7 +83,13 @@ The tools/services used are:
 - [`Contrast Security`](https://www.contrastsecurity.com).
 - [`Probely`](https://probely.com).
 
+
+Comments
+--------
 ### If any phase got errors or violations, the pipeline will stop.
+### All environments variables must also have a secret with the same name. 
+### You can define the secret in the repository settings. 
+### DON'T EXPOSE OR COMMIT ANY SECRET IN THE PROJECT.
 
 Architecture
 ------------

@@ -1,7 +1,7 @@
 Getting Started
 ---------------
 
-This is a demo project for education/training purposes for DevOps.
+This is a demo project for education/training purposes of DevOps.
 
 [![Pipeline](https://github.com/fvilarinho/demo/actions/workflows/pipeline.yml/badge.svg)](https://github.com/fvilarinho/demo/actions/workflows/pipeline.yml)
 

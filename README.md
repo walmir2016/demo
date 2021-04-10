@@ -83,6 +83,7 @@ The tools/services used are:
 - [`Contrast Security`](https://www.contrastsecurity.com).
 - [`Probely`](https://probely.com).
 
+Today, this phase is manual but it can be automated easily with API calls.
 
 Comments
 --------
@@ -105,6 +106,7 @@ Roadmap
 -------
 - Add integration with Slack for notifications.
 - Add integration with GitHub for ticket control.
+- Add integration with Probely for scanner automation.
 
 How to install
 --------------

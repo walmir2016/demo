@@ -24,7 +24,7 @@ jobs:
       with:
         java-version: 11
 
-    - name: Compile and Build
+    - name: Compile and Build (Gradle)
       run: ./gradlew clean build
       
     - name: Code Analysis (Sonar)
@@ -38,15 +38,17 @@ jobs:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       run: ./snyk-linux monitor
 
-    - name: Packaging
+    - name: Packaging (Docker image)
       env:
         CONTRAST_CONFIG_DATA: ${{ secrets.CONTRAST_CONFIG_DATA }}
       run: ./package.sh
 
-    - name: Test
+    - name: Package Analysis (Snyk)
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       run: ./snyk-linux container test fvilarinho/demo:latest
 
-    - name: Publishing
+    - name: Publishing (Github Packages)
       env:
         DOCKER_REGISTRY_URL: ${{ secrets.DOCKER_REGISTRY_URL }}
         DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
@@ -59,7 +61,7 @@ jobs:
         kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}
         args: delete pods --all
 
-    - name: Deploy
+    - name: Deploy in cluster
       uses: danielr1996/kubectl-action@1.0.0
       with:
         kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}

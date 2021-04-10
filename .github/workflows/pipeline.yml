@@ -19,20 +19,13 @@ jobs:
     - name: Grant permissions
       run: chmod +x gradlew; chmod +x *.sh
 
-    - name: Compile and Build
+    - name: Compile and Code Analysis
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: ./build.sh
       
-    - name: Code Analysis
-      uses: kitabisa/sonarqube-action@v1.1.0
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      with:
-        host: https://sonarcloud.io
-
     - name: Packaging
       env:
         CONTRAST_CONFIG_DATA: ${{ secrets.CONTRAST_CONFIG_DATA }}

@@ -43,7 +43,6 @@ jobs:
         CONTRAST_CONFIG_DATA: ${{ secrets.CONTRAST_CONFIG_DATA }}
         DOCKER_REGISTRY_URL: ${{ secrets.DOCKER_REGISTRY_URL }}
         DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
-        DOCKER_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
       run: ./package.sh
 
     - name: Package Analysis (Snyk)
@@ -51,7 +50,6 @@ jobs:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         DOCKER_REGISTRY_URL: ${{ secrets.DOCKER_REGISTRY_URL }}
         DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
-        DOCKER_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
       run: ./packageAnalysis.sh
 
     - name: Publishing (Github Packages)

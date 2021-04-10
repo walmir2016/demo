@@ -11,4 +11,4 @@
 # - DOCKER_REGISTRY_USERNAME: User name to connect in the registry.
 # - DOCKER_REGISTRY_PASSWORD: Password to connect in the registry.
 echo $DOCKER_REGISTRY_PASSWORD | docker login -u $DOCKER_REGISTRY_USERNAME $DOCKER_REGISTRY_URL --password-stdin
-docker-compose push
+docker push $DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/demo:latest

@@ -18,7 +18,7 @@ jobs:
       with:
         java-version: 11
 
-    - name: Grant permissions
+    - name: Grant pipeline scripts permissions
       run: chmod +x gradlew; chmod +x *.sh
 
     - name: Compile and Code Analysis
@@ -27,6 +27,12 @@ jobs:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: ./build.sh
+      
+    - name: Snyk
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      uses: snyk/actions@0.3.0
       
     - name: Packaging
       env:

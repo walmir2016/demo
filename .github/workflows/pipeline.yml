@@ -16,6 +16,9 @@ jobs:
     - name: Set up pipeline permissions
       run: chmod +x gradlew; chmod +x *.sh
 
+    - name: Set up Snyk client
+      run: git clone https://github.com/snyk/snyk-cli-action/blob/master/snyk-linux; chmod +x ./snyk-linux/snyk-linux
+
     - name: Set up compile and build
       uses: actions/setup-java@v1
       with:
@@ -36,7 +39,7 @@ jobs:
       run: ./gradlew snyk-monitor
 
     - name: Test
-      run: ./snyk-linux
+      run: ./snyk-linux/snyk-linux
 
     - name: Packaging
       env:

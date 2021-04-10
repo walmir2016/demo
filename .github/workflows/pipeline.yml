@@ -8,13 +8,13 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-    - name: Set up pipeline permissions
-      run: chmod +x gradlew; chmod +x *.sh
-
     - name: Set up project files
       uses: actions/checkout@v2
       with:
         fetch-depth: 0
+
+    - name: Set up pipeline permissions
+      run: chmod +x gradlew; chmod +x *.sh
 
     - name: Set up compile and build
       uses: actions/setup-java@v1

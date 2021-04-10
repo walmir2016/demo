@@ -33,7 +33,7 @@ jobs:
     - name: Libraries Analysis (Snyk)
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-      run: ./gradlew snyk-test
+      run: ./gradlew snyk-monitor
 
     - name: Packaging
       env:

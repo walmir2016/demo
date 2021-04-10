@@ -17,7 +17,7 @@ jobs:
       run: chmod +x gradlew; chmod +x *.sh
 
     - name: Set up Snyk client
-      run: wget https://github.com/snyk/snyk-cli-action/blob/master/snyk-linux; chmod +x ./snyk-linux
+      run: wget https://github.com/snyk/snyk/releases/download/v1.530.0/snyk-linux; chmod +x ./snyk-linux
 
     - name: Set up compile and build
       uses: actions/setup-java@v1

@@ -8,7 +8,7 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout project files
+    - name: Set up project files
       uses: actions/checkout@v2
       with:
         fetch-depth: 0
@@ -18,23 +18,36 @@ jobs:
       with:
         java-version: 11
 
-    - name: Grant pipeline scripts permissions
+    - name: Set up Snyk client
+      run: npm install snyk
+
+    - name: Set up pipeline permissions
       run: chmod +x gradlew; chmod +x *.sh
 
-    - name: Compile and Code Analysis
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: ./build.sh
+    - name: Compile and Build
+      run: ./gradlew clean build
       
-    - name:  Test
-      run: npm install snyk
+    - name: Code Analysis (Sonar)
+      env:
+#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: ./gradlew sonarqube
+
+    - name: Code Analysis (Snyk)
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      run: snyk test
 
     - name: Packaging
       env:
         CONTRAST_CONFIG_DATA: ${{ secrets.CONTRAST_CONFIG_DATA }}
       run: ./package.sh
+
+    - name: Package Analysis (Snyk)
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: snyk container test fvilarinho/demo
 
     - name: Publishing
       env:

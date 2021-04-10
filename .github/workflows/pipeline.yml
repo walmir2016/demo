@@ -28,12 +28,9 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: ./build.sh
       
-    - name: Snyk CLI Action
-      uses: clarkio/snyk-cli-action@1.0.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-      
+    - name:  Test
+      run: npm install -g snyk
+
     - name: Packaging
       env:
         CONTRAST_CONFIG_DATA: ${{ secrets.CONTRAST_CONFIG_DATA }}

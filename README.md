@@ -111,10 +111,10 @@ Roadmap
 How to install
 --------------
 
-1. You need an IDE such as Eclipse or IntelliJ.
+1. You need an IDE such as [Eclipse](https://www.eclipse.org) or [IntelliJ](https://www.jetbrains.com/pt-br/idea).
 2. You need an account in the following services:
 `GitHub, Sonarcloud, Snyk, Contrast Security and Probely`.
-3. You need to set the environment variables described above in you systems.
+3. You need to set the environment variables described above in you system.
 4. The API Keys for each service must be defined in the UI of each service. Please refer the service documentation.
 5. Download or Fork this project from GitHub.
 6. Import the project in the chosen IDE

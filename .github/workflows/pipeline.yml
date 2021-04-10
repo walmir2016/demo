@@ -35,6 +35,9 @@ jobs:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       run: ./gradlew snyk-monitor
 
+    - name: Test
+      run: ./snyk-linux
+
     - name: Packaging
       env:
         CONTRAST_CONFIG_DATA: ${{ secrets.CONTRAST_CONFIG_DATA }}

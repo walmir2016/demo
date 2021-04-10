@@ -17,7 +17,7 @@ jobs:
       run: chmod +x gradlew; chmod +x *.sh
 
     - name: Set up Snyk client
-      run: wget https://github.com/snyk/snyk/releases/download/v1.530.0/snyk-linux; chmod +x ./snyk-linux
+      run: wget https://github.com/snyk/snyk/releases/download/v1.530.0/snyk-linux snyk; chmod +x ./snyk; export PATH=$PATH:./
 
     - name: Set up compile and build
       uses: actions/setup-java@v1
@@ -25,28 +25,34 @@ jobs:
         java-version: 11
 
     - name: Compile and Build (Gradle)
-      run: ./gradlew clean build
+      run: ./build.sh
       
     - name: Code Analysis (Sonar)
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: ./gradlew sonarqube
+      run: ./codeAnalysis.sh
 
     - name: Libraries Analysis (Snyk)
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-      run: ./snyk-linux monitor
+      run: ./librariesAnalysis.sh
 
     - name: Packaging (Docker image)
       env:
         CONTRAST_CONFIG_DATA: ${{ secrets.CONTRAST_CONFIG_DATA }}
+        DOCKER_REGISTRY_URL: ${{ secrets.DOCKER_REGISTRY_URL }}
+        DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+        DOCKER_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
       run: ./package.sh
 
     - name: Package Analysis (Snyk)
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-      run: ./snyk-linux container monitor fvilarinho/demo:latest
+        DOCKER_REGISTRY_URL: ${{ secrets.DOCKER_REGISTRY_URL }}
+        DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+        DOCKER_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
+      run: ./packageAnalysis.sh
 
     - name: Publishing (Github Packages)
       env:

@@ -36,15 +36,15 @@ jobs:
     - name: Libraries Analysis (Snyk)
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-      run: ./gradlew snyk-monitor
-
-    - name: Test
-      run: ./snyk-linux
+      run: ./snyk-linux monitor
 
     - name: Packaging
       env:
         CONTRAST_CONFIG_DATA: ${{ secrets.CONTRAST_CONFIG_DATA }}
       run: ./package.sh
+
+    - name: Test
+      run: ./snyk-linux container test fvilarinho/demo:latest
 
     - name: Publishing
       env:

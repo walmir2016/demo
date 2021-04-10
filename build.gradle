@@ -5,7 +5,7 @@ plugins {
 	id 'java'
 	id 'war'
 	id "org.sonarqube" version "3.1.1"
-	id "io.snyk.gradle.plugin.snykplugin" version "0.4"
+//	id "io.snyk.gradle.plugin.snykplugin" version "0.4"
 }
 
 // Sonarcloud attributes.
@@ -19,11 +19,11 @@ sonarqube {
 }
 
 // Snyk attributes.
-snyk {
-	severity = 'low'
-	autoDownload = true
-	autoUpdate = true
-}
+//snyk {
+//	severity = 'low'
+//	autoDownload = true
+//	autoUpdate = true
+//}
 
 // Build attributes.
 group = 'com.example'

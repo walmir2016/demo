@@ -27,9 +27,11 @@ jobs:
       run: ./build.sh
       
     - name: Code analysis
-      uses: SonarSource/sonarcloud-github-action@v1.5
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      uses: jkumar19/sonar-build-breaker@3.0.0
+      with:
+        project_key: fvilarinho_demo
+        sonar_token: ${{ secrets.SONAR_TOKEN }}
+        sonar_url: https://sonarcloud.io
 
     - name: Packaging
       env:

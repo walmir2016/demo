@@ -2,4 +2,4 @@
 
 cd backend
 
-./gradlew snyk-test
+./gradlew snyk-monitor

@@ -57,9 +57,29 @@ jobs:
         DOCKER_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
       run: ./publish.sh
 
-    - name: Deploy (Kubernetes)
+    - name: Deploy (Database)
+      uses: danielr1996/kubectl-action@1.0.0
       env:
-        KUBECONFIG: ${{ secrets.KUBECONFIG }}
         DOCKER_REGISTRY_URL: ${{ secrets.DOCKER_REGISTRY_URL }}
         DOCKER_REGISTRY_USER: ${{ secrets.DOCKER_REGISTRY_USER }}
-      run: ./deploy.sh
+      with:
+        kubeconfig: ${{ secrets.KUBECONFIG }}
+        args: set image statefulset database database=$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USER/demo-database -n demo
+
+    - name: Deploy (Backend)
+      uses: danielr1996/kubectl-action@1.0.0
+      env:
+        DOCKER_REGISTRY_URL: ${{ secrets.DOCKER_REGISTRY_URL }}
+        DOCKER_REGISTRY_USER: ${{ secrets.DOCKER_REGISTRY_USER }}
+      with:
+        kubeconfig: ${{ secrets.KUBECONFIG }}
+        args: set image deployment backend backend=$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USER/demo-backend -n demo
+
+    - name: Deploy (Frontend)
+      uses: danielr1996/kubectl-action@1.0.0
+      env:
+        DOCKER_REGISTRY_URL: ${{ secrets.DOCKER_REGISTRY_URL }}
+        DOCKER_REGISTRY_USER: ${{ secrets.DOCKER_REGISTRY_USER }}
+      with:
+        kubeconfig: ${{ secrets.KUBECONFIG }}
+        args: set image deployment frontend frontend=$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USER/demo-frontend -n demo

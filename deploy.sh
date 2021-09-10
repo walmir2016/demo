@@ -10,6 +10,10 @@ if [ ! -z "$KUBECONFIG" ]; then
   mkdir -p ~/.kube
 
   echo "$KUBECONFIG" > ~/.kube/config
+
+  KUBECONFIG_DATA=`base64 -d -i ~/.kube/config`
+
+  echo "$KUBECONFIG_DATA" > ~/.kube/config
 fi
 
 $KUBECTL_CMD set image statefulset database database=$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USER/demo-database -n demo

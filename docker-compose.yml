@@ -1,11 +1,36 @@
 version: '3.8'
 
 services:
-  demo:
+  database:
     build:
-      context: .
-    image: ghcr.io/fvilarinho/demo:latest
+      context: database
+    image: ghcr.io/fvilarinho/demo-database:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=demo@2021
+    container_name: database
+    hostname: database
     ports:
-      - 8080:8080
-    container_name: demo
-    hostname: demo
+      - "3306:3306"
+
+  backend:
+    build:
+      context: backend
+    image: ghcr.io/fvilarinho/demo-backend:latest
+    container_name: backend
+    hostname: backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+
+  frontend:
+    build:
+      context: frontend
+    image: ghcr.io/fvilarinho/demo-frontend:latest
+    container_name: frontend
+    hostname: frontend
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - backend

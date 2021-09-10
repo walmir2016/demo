@@ -1,9 +1,5 @@
 #!/bin/bash
 
-SNYK_CMD=`which snyk`
-
-if [ -z "$SNYK_CMD" ]; then
-  SNYK_CMD=./snyk
-fi
-
-$SNYK_CMD container monitor $DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/demo:latest
+docker scan --token $SNYK_TOKEN $DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USER/demo-database:latest
+docker scan --token $SNYK_TOKEN $DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USER/demo-backend:latest
+docker scan --token $SNYK_TOKEN $DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USER/demo-frontend:latest

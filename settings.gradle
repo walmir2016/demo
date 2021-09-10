@@ -1,2 +1,2 @@
-// Define the project name.
-rootProject.name = 'demo'
+rootProject.name = "demo"
+include("backend")

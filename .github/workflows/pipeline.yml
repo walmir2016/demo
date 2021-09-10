@@ -2,7 +2,9 @@ name: Pipeline
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - 'master'
+      - 'develop'
 
 jobs:
   run:
@@ -38,35 +40,19 @@ jobs:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       run: ./librariesAnalysis.sh
 
-    - name: Packaging (Docker image)
-      env:
-        CONTRAST_CONFIG_DATA: ${{ secrets.CONTRAST_CONFIG_DATA }}
-        DOCKER_REGISTRY_URL: ${{ secrets.DOCKER_REGISTRY_URL }}
-        DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+    - name: Packaging (Docker images)
       run: ./package.sh
 
     - name: Package Analysis (Snyk)
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         DOCKER_REGISTRY_URL: ${{ secrets.DOCKER_REGISTRY_URL }}
-        DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+        DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USER }}
       run: ./packageAnalysis.sh
 
     - name: Publishing (Github Packages)
       env:
         DOCKER_REGISTRY_URL: ${{ secrets.DOCKER_REGISTRY_URL }}
-        DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+        DOCKER_REGISTRY_USER: ${{ secrets.DOCKER_REGISTRY_USER }}
         DOCKER_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
       run: ./publish.sh
-
-    - name: Clear cluster
-      uses: danielr1996/kubectl-action@1.0.0
-      with:
-        kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}
-        args: delete pods --all
-
-    - name: Deploy in cluster
-      uses: danielr1996/kubectl-action@1.0.0
-      with:
-        kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}
-        args: apply -f pod.yaml

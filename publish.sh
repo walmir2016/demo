@@ -1,4 +1,4 @@
 #!/bin/bash
 
-echo $DOCKER_REGISTRY_PASSWORD | docker login -u $DOCKER_REGISTRY_USERNAME $DOCKER_REGISTRY_URL --password-stdin
-docker push $DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/demo:latest
+echo $DOCKER_REGISTRY_PASSWORD | docker login -u $DOCKER_REGISTRY_USER $DOCKER_REGISTRY_URL --password-stdin
+docker-compose push

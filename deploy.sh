@@ -6,16 +6,14 @@ if [ -z "$KUBECTL_CMD" ]; then
   KUBECTL_CMD=./kubectl
 fi
 
-if [ ! -z "$KUBECONFIG" ]; then
+if [ ! -z "$KUBECONFIG_DATA" ]; then
   mkdir -p ~/.kube#
 
-  echo "$KUBECONFIG" > ~/.kube/config
+  echo "$KUBECONFIG_DATA" > ~/.kube/config.tmp
 
-  KUBECONFIG=`base64 -d -i ~/.kube/config`
+  base64 -d -i ~/.kube/config.tmp > ~/.kube/config
 
-  echo "$KUBECONFIG" > ~/.kube/config
-
-  KUBECONFIG=~/.kube/config
+  rm ~/.kube/config.tmp
 fi
 
 $KUBECTL_CMD set image statefulset database database=$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USER/demo-database -n demo

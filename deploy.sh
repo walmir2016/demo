@@ -3,7 +3,7 @@
 KUBECTL_CMD=`which kubectl`
 
 if [ -z "$KUBECTL_CMD" ]; then
-  $KUBECTL_CMD=./kubectl
+  KUBECTL_CMD=./kubectl
 fi
 
 if [ ! -z "$KUBECONFIG" ]; then

@@ -2,6 +2,7 @@
 plugins {
 	id "org.springframework.boot" version "2.4.4"
 	id "io.spring.dependency-management" version "1.0.11.RELEASE"
+	id "io.snyk.gradle.plugin.snykplugin" version "0.4"
 	id "java"
 	id "war"
 	id "org.sonarqube" version "3.1.1"
@@ -15,6 +16,13 @@ sonarqube {
 		property "sonar.host.url", "https://sonarcloud.io"
 		property "sonar.sources", "src/main/java,src/main/webapp,src/main/resources/static"
 	}
+}
+
+snyk {
+	arguments = '--all-sub-projects'
+	severity = 'high'
+	autoDownload = true
+	autoUpdate = true
 }
 
 // Build attributes.

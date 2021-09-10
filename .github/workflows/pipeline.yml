@@ -15,8 +15,8 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Set up pipeline permissions
-      run: chmod +x gradlew; chmod +x *.sh ; cd backend ; chmod +x gradlew
+    - name: Set up Snyk client
+      run: wget https://github.com/snyk/snyk/releases/download/v1.530.0/snyk-linux; chmod +x ./snyk-linux; mv ./snyk-linux ./snyk
 
     - name: Set up compile and build
       uses: actions/setup-java@v1

@@ -2,6 +2,7 @@ Getting Started
 ---------------
 
 This is a demo project for education/training purposes of DevOps. All the services used below are in the Cloud to facilitate the understanding.
+The architecture uses microservices and containerization.
 
 [![Pipeline](https://github.com/fvilarinho/demo/actions/workflows/pipeline.yml/badge.svg?branch=master)](https://github.com/fvilarinho/demo/actions/workflows/pipeline.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fvilarinho_demo_backend&metric=alert_status)](https://sonarcloud.io/dashboard?id=fvilarinho_demo_backend)

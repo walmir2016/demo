@@ -3,12 +3,10 @@ Getting Started
 
 This is a demo project for education/training purposes of DevOps. All the services used below are in the Cloud to facilitate the understanding.
 
+[![Pipeline](https://github.com/fvilarinho/demo/actions/workflows/pipeline.yml/badge.svg?branch=master)](https://github.com/fvilarinho/demo/actions/workflows/pipeline.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fvilarinho_demo_backend&metric=alert_status)](https://sonarcloud.io/dashboard?id=fvilarinho_demo_backend)
 
-
-
-[![Pipeline](https://github.com/fvilarinho/demo/actions/workflows/pipeline.yml/badge.svg)](https://github.com/fvilarinho/demo/actions/workflows/pipeline.yml)
-
-It uses [`GitHub Actions`](https://github.com/features/actions) that contains a pipeline with 7 phases described below:
+The pipeline uses [`GitHub Actions`](https://github.com/features/actions) that contains a pipeline with 7 phases described below:
 
 ### 1. Compile and Build
 All commands of this phase are defined in `build.sh` file. 
@@ -25,7 +23,6 @@ The tools used are:
 - [`Sonar`](https://sonardcloud.io)
 
 Environments variables needed in this phase:
-- `GITHUB_TOKEN`: API Key used by Sonar client to communicate with GitHub.
 - `SONAR_TOKEN`: API Key used by Sonar client to store the generated analysis.
 
 ### 3. Libraries Analysis (White-box testing - SAST)
@@ -44,11 +41,6 @@ Once the code and libraries were checked, it's time build the package to be used
 The tools/services used are:
 - [`Docker`](https://www.docker.com)
 
-Environments variables needed in this phase:
-- `CONTRAST_CONFIG_DATA`: Configuration data used by the Contrast Security agent. Contrast Security is a tool for DAST (Dynamic Application Security Testing) and RASP (Runtime Application Self Protection).
-- `DOCKER_REGISTRY_URL`: URL of the Docker registry where the Docker image will be stored.
-- `DOCKER_REGISTRY_USERNAME`: Username of the Docker registry.
-
 ### 5. Package Analysis
 All commands of this phase are defined in `packageAnalysis.sh` file.
 It checks for vulnerabilities in the generated package.
@@ -58,9 +50,9 @@ The tools/services used are:
 Environments variables needed in this phase:
 - `SNYK_TOKEN`: API Key used by Snyk to store the generated analysis.
 - `DOCKER_REGISTRY_URL`: URL of the Docker registry where the Docker image is stored.
-- `DOCKER_REGISTRY_USERNAME`: Username of the Docker registry.
+- `DOCKER_REGISTRY_USER`: Username of the Docker registry.
 
-### 5. Publishing
+### 6. Publishing
 All commands of this phase are defined in `publish.sh` file.
 It publishes the package in the Docker registry.
 The tools/services used are:
@@ -69,22 +61,8 @@ The tools/services used are:
 
 Environments variables needed in this phase:
 - `DOCKER_REGISTRY_URL`: URL of the Docker registry where the Docker image is stored.
-- `DOCKER_REGISTRY_USERNAME`: Username of the Docker registry.
+- `DOCKER_REGISTRY_USER`: Username of the Docker registry.
 - `DOCKER_REGISTRY_PASSWORD`: Password of the Docker registry.
-
-### 6. Deployment
-All commands of this phase are defined by the GitHub action called `danielr1996/kubectl-action@1.0.0`.
-It deploys the generated package in a Kubernetes cluster that will be used by the vulnerabilities scanning.
-The tools/services used are:
-- [`Kubernetes`](https://kubernetes.io) as Container operator/orchestrator.
-- [`Linode`](https://www.linode.com) as Cloud infrastructure.
-
-### 7. Scanner (Black-box testing - DAST) 
-All commands of this phase are defined by `scanner.sh` file.
-It starts a scanner pointing to the application endpoint (URL).
-The tools/services used are:
-- [`Contrast Security`](https://www.contrastsecurity.com).
-- [`Probely`](https://probely.com).
 
 Today, this phase is manual but it can be automated easily with API calls.
 
@@ -100,7 +78,7 @@ Architecture
 The application was developed using:
 - [`Java 11`](https://www.oracle.com/br/java/technologies/javase-jdk11-downloads.html)
 - [`Spring Boot 2.4.x`](https://spring.io)
-- [`H2 Database`](https://www.h2database.com/html/main.html)
+- [`MariaDB Client`](https://mariadb.com/kb/en/clients-utilities/)
 - [`Docker`](https://www.docker.com)
 
 For further documentation please check the documentation of each tool/service.

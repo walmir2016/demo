@@ -59,6 +59,7 @@ jobs:
 
     - name: Deploy (Kubernetes)
       env:
+        KUBECONFIG: ${{ secrets.KUBECONFIG }}
         DOCKER_REGISTRY_URL: ${{ secrets.DOCKER_REGISTRY_URL }}
         DOCKER_REGISTRY_USER: ${{ secrets.DOCKER_REGISTRY_USER }}
-      run: ./publish.sh
+      run: ./deploy.sh

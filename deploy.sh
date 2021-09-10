@@ -14,11 +14,8 @@ if [ ! -z "$KUBECONFIG" ]; then
   KUBECONFIG_DATA=`base64 -d -i ~/.kube/config`
 
   echo "$KUBECONFIG_DATA" > ~/.kube/config
-
-  ls -la ~/.kube/config
-  cat ~/.kube/config
 fi
 
-#$KUBECTL_CMD set image statefulset database database=$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USER/demo-database -n demo
+$KUBECTL_CMD set image statefulset database database=$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USER/demo-database -n demo
 #$KUBECTL_CMD set image deployment backend backend=$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USER/demo-backend -n demo
 #$KUBECTL_CMD set image deployment frontend frontend=$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USER/demo-frontend -n demo

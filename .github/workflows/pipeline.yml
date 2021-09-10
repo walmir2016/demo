@@ -16,7 +16,10 @@ jobs:
         fetch-depth: 0
 
     - name: Set up Snyk client
-      run: wget https://github.com/snyk/snyk/releases/download/v1.530.0/snyk-linux; chmod +x ./snyk-linux; mv ./snyk-linux ./snyk
+      run: wget https://github.com/snyk/snyk/releases/download/v1.530.0/snyk-linux; mv ./snyk-linux ./snyk; chmod +x ./snyk;
+
+    - name: Set up Kubernetes client
+      run: curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"; mv kubectl.sha256 kubectl; chmod +x kubectl;
 
     - name: Set up compile and build
       uses: actions/setup-java@v1
@@ -52,4 +55,10 @@ jobs:
         DOCKER_REGISTRY_URL: ${{ secrets.DOCKER_REGISTRY_URL }}
         DOCKER_REGISTRY_USER: ${{ secrets.DOCKER_REGISTRY_USER }}
         DOCKER_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
+      run: ./publish.sh
+
+    - name: Deploy (Kubernetes)
+      env:
+        DOCKER_REGISTRY_URL: ${{ secrets.DOCKER_REGISTRY_URL }}
+        DOCKER_REGISTRY_USER: ${{ secrets.DOCKER_REGISTRY_USER }}
       run: ./publish.sh

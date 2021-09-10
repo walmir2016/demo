@@ -11,8 +11,6 @@
         <form action="search" method="POST">
             <jsp:include page="filter.jsp"/>
             <jsp:include page="grid.jsp"/>
-            <br/>
-            <small id="permissionDeniedHelp" class="form-text text-muted">${permissionDeniedMessage}</small>
         </form>
     </div>
 </body>

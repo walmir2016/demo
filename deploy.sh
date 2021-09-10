@@ -7,7 +7,7 @@ if [ -z "$KUBECTL_CMD" ]; then
 fi
 
 if [ ! -z "$KUBECONFIG_DATA" ]; then
-  mkdir -p ~/.kube#
+  mkdir -p ~/.kube
 
   echo "$KUBECONFIG_DATA" > ~/.kubeconfig
 

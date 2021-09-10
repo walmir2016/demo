@@ -16,6 +16,7 @@ if [ ! -z "$KUBECONFIG" ]; then
   echo "$KUBECONFIG_DATA" > ~/.kube/config
 
   ls -la ~/.kube/config
+  cat ~/.kube/config
 fi
 
 #$KUBECTL_CMD set image statefulset database database=$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USER/demo-database -n demo

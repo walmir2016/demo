@@ -23,6 +23,7 @@ The tools used are:
 - [`Sonar`](https://sonardcloud.io)
 
 Environments variables needed in this phase:
+- `GITHUB_TOKEN`: API Key used by Sonar client to communicate with GitHub.
 - `SONAR_TOKEN`: API Key used by Sonar client to store the generated analysis.
 
 ### 3. Libraries Analysis (White-box testing - SAST)

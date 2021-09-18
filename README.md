@@ -79,17 +79,13 @@ Architecture
 ------------
 The application was developed using:
 - [`Java 11`](https://www.oracle.com/br/java/technologies/javase-jdk11-downloads.html)
-- [`Spring Boot 2.4.x`](https://spring.io)
+- [`Spring Boot 2.5.4`](https://spring.io)
+- [`Mockito 3`](https://site.mockito.org/)
+- [`JUnit 5`](https://junit.org/junit5/)
 - [`MariaDB Client`](https://mariadb.com/kb/en/clients-utilities/)
 - [`Docker`](https://www.docker.com)
 
 For further documentation please check the documentation of each tool/service.
-
-Roadmap
--------
-- Add integration with Slack for notifications.
-- Add integration with GitHub for ticket control.
-- Add integration with Probely for scanner automation.
 
 How to install
 --------------
@@ -108,10 +104,10 @@ Other References
 
 - [Official Gradle documentation](https://docs.gradle.org)
 - [Spring Boot Gradle Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.4.4/gradle-plugin/reference/html/)
-- [Spring Web](https://docs.spring.io/spring-boot/docs/2.4.4/reference/htmlsingle/#boot-features-developing-web-applications)
-- [Spring Data JPA](https://docs.spring.io/spring-boot/docs/2.4.4/reference/htmlsingle/#boot-features-jpa-and-spring-data)
+- [Spring Web](https://docs.spring.io/spring-boot/docs/2.5.4/reference/htmlsingle/#boot-features-developing-web-applications)
+- [Spring Data JPA](https://docs.spring.io/spring-boot/docs/2.5.4/reference/htmlsingle/#boot-features-jpa-and-spring-data)
 - [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-- [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)
+- [Accessing Data with JPA](https://spring.io/guides/gs/acce****ssing-data-jpa/)
 - [My LinkedIn Profile](https://www.linkedin.com/in/fvilarinho)
 
 All opinions and standard described here are my own.

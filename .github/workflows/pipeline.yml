@@ -50,8 +50,6 @@ jobs:
     - name: Package Analysis (Snyk)
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        DOCKER_REGISTRY_URL: ${{ secrets.DOCKER_REGISTRY_URL }}
-        DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USER }}
       run: ./packageAnalysis.sh
 
     - name: Publishing (Github Packages)
@@ -63,7 +61,5 @@ jobs:
 
     - name: Deploy (Kubernetes)
       env:
-        DOCKER_REGISTRY_URL: ${{ secrets.DOCKER_REGISTRY_URL }}
-        DOCKER_REGISTRY_USER: ${{ secrets.DOCKER_REGISTRY_USER }}
         KUBECONFIG_DATA: ${{ secrets.KUBECONFIG_DATA }}
       run: ./deploy.sh

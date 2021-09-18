@@ -83,7 +83,7 @@ The application uses:
 - [`MariaDB`](https://mariadb.com/)
 - [`NGINX 1.18`](https://www.nginx.com/****)
 - [`Docker 20.10.8`](https://www.docker.com)
-- [`Kubernetes 1.21.4`](https://kubernetes.io/)
+- [`K3S 1.21.4`](https://k3s.io/)
 
 For further documentation please check the documentation of each tool/service.
 

@@ -1,6 +1,5 @@
 Getting Started
 ---------------
-
 This is a demo project for education/training purposes of DevOps. All the services used below are in the Cloud to facilitate the understanding.
 The architecture uses microservices and containerization.
 
@@ -77,19 +76,22 @@ Comments
 
 Architecture
 ------------
-The application was developed using:
+The application uses:
 - [`Java 11`](https://www.oracle.com/br/java/technologies/javase-jdk11-downloads.html)
 - [`Spring Boot 2.5.4`](https://spring.io)
+- [`Gradle 6.8.3`](https://www.gradle.org)
 - [`Mockito 3`](https://site.mockito.org/)
 - [`JUnit 5`](https://junit.org/junit5/)
-- [`MariaDB Client`](https://mariadb.com/kb/en/clients-utilities/)
-- [`Docker`](https://www.docker.com)
+- [`MariaDB`](https://mariadb.com/)
+- [`Apache Tomcat 9.0.53`](http://tomcat.apache.org/)
+- [`NGINX 1.18`](https://www.nginx.com/****)
+- [`Docker 20.10.8`](https://www.docker.com)
+- [`Kubernetes 1.21.4`](https://kubernetes.io/)
 
 For further documentation please check the documentation of each tool/service.
 
 How to install
 --------------
-
 1. You need an IDE such as [Eclipse](https://www.eclipse.org) or [IntelliJ](https://www.jetbrains.com/pt-br/idea).
 2. You need an account in the following services:
 `GitHub, Sonarcloud, Snyk, Contrast Security and Probely`.
@@ -101,7 +103,6 @@ How to install
 
 Other References
 ----------------
-
 - [Official Gradle documentation](https://docs.gradle.org)
 - [Spring Boot Gradle Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.4.4/gradle-plugin/reference/html/)
 - [Spring Web](https://docs.spring.io/spring-boot/docs/2.5.4/reference/htmlsingle/#boot-features-developing-web-applications)

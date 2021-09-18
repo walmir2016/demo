@@ -83,7 +83,6 @@ The application uses:
 - [`Mockito 3`](https://site.mockito.org/)
 - [`JUnit 5`](https://junit.org/junit5/)
 - [`MariaDB`](https://mariadb.com/)
-- [`Apache Tomcat 9.0.53`](http://tomcat.apache.org/)
 - [`NGINX 1.18`](https://www.nginx.com/****)
 - [`Docker 20.10.8`](https://www.docker.com)
 - [`Kubernetes 1.21.4`](https://kubernetes.io/)

@@ -13,6 +13,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Unit test class for the service layer.
+ */
 class PhonebookServiceTest{
     private PhonebookPersistence persistence = Mocks.getPersistence();
     private List<Phonebook> mockList = Mocks.getList();
@@ -20,6 +23,7 @@ class PhonebookServiceTest{
     private Phonebook mockNewItem = Mocks.getNewItem();
     private Phonebook mockExistingItem = Mocks.getExistingItem();
     
+    // List all data.
     @Test
     void list(){
         Mockito.when(persistence.findAll()).thenReturn(mockList);
@@ -30,6 +34,7 @@ class PhonebookServiceTest{
         Assertions.assertEquals(list, mockList);
     }
     
+    // Find a phonebook by id.
     @Test
     void findById(){
         Mockito.when(persistence.findById(1)).thenReturn(Optional.of(mockItem));
@@ -66,6 +71,7 @@ class PhonebookServiceTest{
         }
     }
     
+    // Find a phonebook by name.
     @Test
     void findByName(){
         Mockito.when(persistence.findByName("Luke Skywalker")).thenReturn(mockList);
@@ -81,6 +87,7 @@ class PhonebookServiceTest{
         Assertions.assertNull(list);
     }
     
+    // Find a phonebook that contains a part of a name.
     @Test
     void findByNameContaining(){
         Mockito.when(persistence.findByNameContaining("Luke")).thenReturn(mockList);
@@ -96,6 +103,7 @@ class PhonebookServiceTest{
         Assertions.assertNull(list);
     }
     
+    // Delete a phonebook.
     @Test
     void delete(){
         PhonebookService service = new PhonebookService(persistence);
@@ -119,6 +127,7 @@ class PhonebookServiceTest{
         }
     }
     
+    // Save a phonebook.
     @Test
     void save(){
         Mockito.when(persistence.findByName(mockItem.getName())).thenReturn(null);

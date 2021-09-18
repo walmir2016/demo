@@ -24,6 +24,9 @@ sonarqube {
 		property "sonar.organization", "fvilarinho"
 		property "sonar.host.url", "https://sonarcloud.io"
 		property "sonar.sources", "src/main/java,src/main/webapp,src/main/resources/static"
+		property 'sonar.exclusions', "**/ServletInitializer*"
+		property 'sonar.exclusions', ["**/ServletInitializer*", "**/DemoApplication*"]
+		property 'sonar.coverage.exclusions', ["**/ServletInitializer*", "**/DemoApplication*"]
 	}
 }
 
@@ -37,6 +40,14 @@ jacocoTestReport {
 	dependsOn test
 	reports {
 		xml.enabled true
+	}
+	afterEvaluate {
+		classDirectories.setFrom(files(classDirectories.files.collect {
+			fileTree(dir: it, exclude: [
+					"**/ServletInitializer*",
+					"**/DemoApplication*"
+			])
+		}))
 	}
 }
 

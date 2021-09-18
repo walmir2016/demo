@@ -21,7 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Class that defines the HTTP endpoints.
+ * Class that defines the controller of the UI requests.
  *
  * @author fvilarinho
  */
@@ -114,6 +114,7 @@ public class Controller{
         return "form";
     }
     
+    // Endpoint to log data.
     @PostMapping("/log")
     public String log(@RequestBody String body){
         try{

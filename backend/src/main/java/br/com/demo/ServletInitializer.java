@@ -4,7 +4,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 /**
- * Class that defines the startup of the web server.
+ * Class that defines the startup of the servlet responsible to receive the UI requests.
  *
  * @author fvilarinho
  */

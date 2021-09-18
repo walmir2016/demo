@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,10 +18,10 @@ import java.util.Set;
 /**
  * Class that handles the exceptions and violations from the controller.
  *
- * @author fvilarinho
+ * @author fvilarinho@gmail.com
  */
 @ControllerAdvice
-public class ExceptionHandler{
+public class PhonebookExceptionHandler{
     @Autowired
     private PhonebookService service;
     
@@ -36,7 +37,7 @@ public class ExceptionHandler{
     }
     
     // Handles violations of the form.
-    @org.springframework.web.bind.annotation.ExceptionHandler(ConstraintViolationException.class)
+    @ExceptionHandler(ConstraintViolationException.class)
     public String handleViolations(Model model, HttpServletRequest request, ConstraintViolationException ex){
         Set<ConstraintViolation<?>> violations = ex.getConstraintViolations();
         
@@ -53,7 +54,7 @@ public class ExceptionHandler{
     }
     
     // When the data already exists.
-    @org.springframework.web.bind.annotation.ExceptionHandler(PhonebookAlreadyExistsException.class)
+    @ExceptionHandler(PhonebookAlreadyExistsException.class)
     public String handlePhonebookAlreadyExists(Model model, HttpServletRequest request, PhonebookAlreadyExistsException ex){
         model.addAttribute("nameMessage", "This phonebook already exists!");
         
@@ -63,7 +64,7 @@ public class ExceptionHandler{
     }
     
     // When the data was not found.
-    @org.springframework.web.bind.annotation.ExceptionHandler(PhonebookNotFoundException.class)
+    @ExceptionHandler(PhonebookNotFoundException.class)
     public String handlePhonebookNotFound(Model model, HttpServletRequest request, PhonebookNotFoundException ex){
         model.addAttribute("message", "This phonebook was not found!");
         
@@ -73,8 +74,8 @@ public class ExceptionHandler{
     }
     
     // When the log data is invalid.
-    @org.springframework.web.bind.annotation.ExceptionHandler(IllegalArgumentException.class)
-    public void handleInvalidLogData(HttpServletRequest request, HttpServletResponse response, IllegalArgumentException ex) throws IOException{
+    @ ExceptionHandler(IllegalArgumentException.class)
+    public void handleInvalidLogData(HttpServletResponse response, IllegalArgumentException ex) throws IOException{
         response.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage());
     }
 }

@@ -6,9 +6,16 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Interface that implements the persistence layer (JPA + Hibernate).
+ *
+ * @author fvilarinho@gmail.com
+ */
 @Repository
 public interface PhonebookPersistence extends JpaRepository<Phonebook, Integer>{
+    // Find all items that contains part of the name.
     public List<Phonebook> findByNameContaining(String name);
     
+    // Find all items that contains the specified name.
     public List<Phonebook> findByName(String name);
 }

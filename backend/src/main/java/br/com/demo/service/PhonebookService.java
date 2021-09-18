@@ -30,10 +30,12 @@ public class PhonebookService{
         this.persistence = persistence;
     }
     
+    // List all data.
     public List<Phonebook> list(){
         return persistence.findAll();
     }
     
+    // Find a phonebook by id.
     public Phonebook findById(Integer id) throws PhonebookNotFoundException{
         try{
             Optional<Phonebook> result = persistence.findById(id);
@@ -48,27 +50,29 @@ public class PhonebookService{
         }
     }
     
-    public List<Phonebook> findByName(String name){
-        return persistence.findByName(name);
-    }
+    // Find a phonebook by name.
+    public List<Phonebook> findByName(String name) { return persistence.findByName(name); }
     
+    // Find a phonebook that contains a part of the name.
     public List<Phonebook> findByNameContaining(String name){
         return persistence.findByNameContaining(name);
     }
     
+    // Save a phonebook.
     public Phonebook save(Phonebook phonebook) throws PhonebookAlreadyExistsException, PhonebookNotFoundException{
         if(phonebook != null){
             List<Phonebook> list = persistence.findByName(phonebook.getName());
             
             if(list == null || list.isEmpty())
                 return persistence.save(phonebook);
-            
+    
             throw new PhonebookAlreadyExistsException();
         }
     
         throw new PhonebookNotFoundException();
     }
     
+    // Delete a phonebook.
     public void delete(Phonebook phonebook) throws PhonebookNotFoundException{
         if(phonebook != null){
             persistence.delete(phonebook);

@@ -6,7 +6,7 @@ LABEL maintainer="fvilarinho@gmail.com"
 
 # Define the Apache Tomcat version to be used.
 ARG TOMCAT_MAJOR_VERSION=9
-ARG TOMCAT_MINOR_VERSION=0.52
+ARG TOMCAT_MINOR_VERSION=0.53
 ARG TOMCAT_VERSION=${TOMCAT_MAJOR_VERSION}.${TOMCAT_MINOR_VERSION}
 
 # Install essential packages.

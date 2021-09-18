@@ -3,12 +3,21 @@ plugins {
 	id "org.springframework.boot" version "2.4.4"
 	id "io.spring.dependency-management" version "1.0.11.RELEASE"
 	id "io.snyk.gradle.plugin.snykplugin" version "0.4"
+	id "org.sonarqube" version "3.1.1"
+	id "jacoco"
 	id "java"
 	id "war"
-	id "org.sonarqube" version "3.1.1"
 }
 
-// Sonarcloud attributes.
+// Snyk service attributes.
+snyk {
+	arguments = '--all-sub-projects'
+	severity = 'high'
+	autoDownload = true
+	autoUpdate = true
+}
+
+// Sonarcloud service attributes.
 sonarqube {
 	properties {
 		property "sonar.projectKey", "fvilarinho_demo_backend"
@@ -18,11 +27,22 @@ sonarqube {
 	}
 }
 
-snyk {
-	arguments = '--all-sub-projects'
-	severity = 'high'
-	autoDownload = true
-	autoUpdate = true
+// Sonarcloud task dependencies.
+tasks.named("sonarqube").configure {
+	dependsOn test
+}
+
+// Test coverage service attributes and dependencies.
+jacocoTestReport {
+	dependsOn test
+	reports {
+		xml.enabled true
+	}
+}
+
+// Test task dependencies.
+test {
+	finalizedBy jacocoTestReport
 }
 
 // Build attributes.
@@ -45,6 +65,7 @@ dependencies {
 
 	runtime "org.springframework.boot:spring-boot-starter-tomcat"
 
+	testImplementation "org.mockito:mockito-core:3.12.4"
 	testImplementation "org.springframework.boot:spring-boot-starter-test"
 }
 

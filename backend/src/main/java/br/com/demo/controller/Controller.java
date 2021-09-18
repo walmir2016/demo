@@ -1,6 +1,7 @@
 package br.com.demo.controller;
 
-import br.com.demo.exceptions.ItemAlreadyExistsException;
+import br.com.demo.exceptions.PhonebookAlreadyExistsException;
+import br.com.demo.exceptions.PhonebookNotFoundException;
 import br.com.demo.model.Phonebook;
 import br.com.demo.service.PhonebookService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -51,13 +53,20 @@ public class Controller{
                      @RequestParam(value = "q", required = false) String q,
                      @RequestParam(value = "id", required = false) Integer id,
                      @RequestParam(value = "name", required = true) @NotNull @NotBlank(message = "Name is mandatory") String name,
-                     @RequestParam(value = "phone", required = true) @NotNull @NotBlank(message = "Phone is mandatory") String phone) throws ItemAlreadyExistsException{
+                     @RequestParam(value = "phone", required = true) @NotNull @NotBlank(message = "Phone is mandatory") String phone) throws PhonebookAlreadyExistsException, PhonebookNotFoundException{
+        if(id == null){
+            List<Phonebook> items = service.findByName(name);
+        
+            if(items != null && !items.isEmpty())
+                throw new PhonebookAlreadyExistsException();
+        }
+
         Phonebook phonebook = new Phonebook();
         
         phonebook.setId(id);
         phonebook.setName(name);
         phonebook.setPhone(phone);
-        
+    
         service.save(phonebook);
     
         search(model, q);
@@ -70,7 +79,7 @@ public class Controller{
     public String delete(Model model,
                          HttpServletRequest request,
                        @RequestParam(value = "q", required = false) String q,
-                       @RequestParam(value = "id", required = true) Integer id){
+                       @RequestParam(value = "id", required = true) Integer id) throws PhonebookNotFoundException{
         Phonebook phonebook = service.findById(id);
     
         service.delete(phonebook);
@@ -95,7 +104,7 @@ public class Controller{
     public String edit(Model model,
                        HttpServletRequest request,
                        @RequestParam(value = "q", required = false) String q,
-                       @RequestParam(value = "id", required = true) Integer id){
+                       @RequestParam(value = "id", required = true) Integer id) throws PhonebookNotFoundException{
         Phonebook phonebook = service.findById(id);
 
         model.addAttribute("id", phonebook.getId());
@@ -114,8 +123,10 @@ public class Controller{
         }
         catch(IOException e){
             logger.log(Level.SEVERE, "Something wrong happened: {0}, ", e.getMessage());
+            
+            throw new IllegalArgumentException();
         }
-        
+    
         return "blank";
     }
 }

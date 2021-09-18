@@ -5,5 +5,5 @@ package br.com.demo.exceptions;
  *
  * @author fvilarinho
  */
-public class ItemAlreadyExistsException extends Exception{
+public class PhonebookAlreadyExistsException extends Exception{
 }

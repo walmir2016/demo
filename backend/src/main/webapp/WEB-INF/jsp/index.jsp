@@ -12,6 +12,8 @@
             <jsp:include page="filter.jsp"/>
             <jsp:include page="grid.jsp"/>
         </form>
+        <br/>
+        <small id="messageHelp" class="form-text text-muted">${message}</small>
     </div>
 </body>
 </html>

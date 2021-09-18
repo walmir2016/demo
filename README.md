@@ -50,8 +50,6 @@ The tools/services used are:
 
 Environments variables needed in this phase:
 - `SNYK_TOKEN`: API Key used by Snyk to store the generated analysis.
-- `DOCKER_REGISTRY_URL`: URL of the Docker registry where the Docker image is stored.
-- `DOCKER_REGISTRY_USER`: Username of the Docker registry.
 
 ### 6. Publishing
 All commands of this phase are defined in `publish.sh` file.

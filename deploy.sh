@@ -18,6 +18,6 @@ if [ ! -z "$KUBECONFIG_DATA" ]; then
   rm ~/.kubeconfig
 fi
 
-$KUBECTL_CMD set image statefulset database database=$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USER/demo-database -n demo
-$KUBECTL_CMD set image daemonset backend backend=$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USER/demo-backend -n demo
-$KUBECTL_CMD set image daemonSet frontend frontend=$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USER/demo-frontend -n demo
+$KUBECTL_CMD set image statefulset database database=ghcr.io/fvilarinho/demo-database -n demo
+$KUBECTL_CMD set image daemonset backend backend=ghcr.io/fvilarinho/demo-backend -n demo
+$KUBECTL_CMD set image daemonSet frontend frontend=ghcr.io/fvilarinho/demo-frontend -n demo

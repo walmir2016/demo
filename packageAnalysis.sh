@@ -6,6 +6,6 @@ if [ -z "$SNYK_CMD" ]; then
   SNYK_CMD=./snyk
 fi
 
-$SNYK_CMD container monitor $DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/demo-database:latest
-$SNYK_CMD container monitor $DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/demo-backend:latest
-$SNYK_CMD container monitor $DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/demo-frontend:latest
+$SNYK_CMD container monitor ghcr.io/fvilarinho/demo-database:latest
+$SNYK_CMD container monitor ghcr.io/fvilarinho/demo-backend:latest
+$SNYK_CMD container monitor ghcr.io/fvilarinho/demo-frontend:latest

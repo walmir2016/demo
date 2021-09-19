@@ -61,7 +61,6 @@ The tools/services used are:
 - [`GitHub Packages`](https://github.com/features/packages) - Docker registry where the images are stored.
 
 Environments variables needed in this phase:
-- `DOCKER_REGISTRY_URL`: URL of the Docker registry where the Docker image is stored.
 - `DOCKER_REGISTRY_USER`: Username of the Docker registry.
 - `DOCKER_REGISTRY_PASSWORD`: Password of the Docker registry.
 
@@ -92,26 +91,40 @@ Architecture
 The application uses:
 - [`Java 11`](https://www.oracle.com/br/java/technologies/javase-jdk11-downloads.html) - Programming Language.
 - [`Spring Boot 2.5.4`](https://spring.io) - Development Framework.
-- [`Gradle 6.8.3`](https://www.gradle.org)
-- [`Mockito 3`](https://site.mockito.org/)
-- [`JUnit 5`](https://junit.org/junit5/)
-- [`MariaDB`](https://mariadb.com/)
-- [`NGINX 1.18`](https://www.nginx.com/****)
-- [`Docker 20.10.8`](https://www.docker.com)
-- [`K3S 1.21.4`](https://k3s.io/)
+- [`Gradle 6.8.3`](https://www.gradle.org) - Automation build tool.
+- [`Mockito 3`](https://site.mockito.org/) - Test framework.
+- [`JUnit 5`](https://junit.org/junit5/) - Test framework.
+- [`MariaDB`](https://mariadb.com/) - Database server.
+- [`NGINX 1.18`](https://www.nginx.com/****) - Web server.
+- [`Docker 20.10.8`](https://www.docker.com) - Containerization tool.
+- [`K3S 1.21.4`](https://k3s.io/) - Containerization tool.
 
 For further documentation please check the documentation of each tool/service.
 
 How to install
 --------------
-1. You need an IDE such as [IntelliJ](https://www.jetbrains.com/pt-br/idea).
-2. You need an account in the following services:
+1. Linux operating system.
+2. You need an IDE such as [IntelliJ](https://www.jetbrains.com/pt-br/idea).
+3. You need an account in the following services:
 `GitHub, Sonarcloud, Snyk, Contrast Security and Probely`.
-3. You need to set the environment variables described above in you system.
-4. The API Keys for each service must be defined in the UI of each service. Please refer the service documentation.
-5. Fork this project from GitHub.
-6. Import the project in IDE.
-7. Commit some changes in the code and follow the execution of the pipeline in GitHub.
+4. You need to set the environment variables described above in you system.
+5. The API Keys for each service must be defined in the UI of each service. Please refer the service documentation.
+6. Fork this project from GitHub.
+7. Import the project in IDE.
+8. Commit some changes in the code and follow the execution of the pipeline in GitHub.
+
+How to run locally
+------------------
+1. In the project directory, execute the scripts below:
+`./build.sh; ./package.sh; docker-compose up`
+2. Remember to rename the packages to use your repository id in all YAML and SH files.
+
+How to run in the cloud
+-----------------------
+1. First, you need to create to find a cloud provider with VPS service (Virtual Private Server).
+2. After you provision the VPS and log into, you need to create a Kubernetes cluster using [`k3s`](https://k3s.io). Follow the instructions of the website.
+3. Then, install the [`Portainer`](https://portainer.io) to facilitate the deployment. Follow the instructions of the website.
+4. Once Portainer is running, just create the namespace and the applications on the cluster.
 
 Other Resources
 ----------------
@@ -126,3 +139,9 @@ Other Resources
 All opinions and standard described here are my own.
 
 That's it! Now enjoy and have fun!
+
+Contact
+-------
+LinkedIn: https://www.linkedin.com/in/fvilarinho
+
+e-Mail: fvilarinho@gmail.com

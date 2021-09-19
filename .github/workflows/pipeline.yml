@@ -14,7 +14,7 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-    - name: Set up project files
+    - name: Set up Project Files
       uses: actions/checkout@v2
       with:
         fetch-depth: 0
@@ -25,41 +25,40 @@ jobs:
     - name: Set up Kubernetes client
       run: curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"; mv kubectl.sha256 kubectl; chmod +x kubectl;
 
-    - name: Set up compile and build
+    - name: Set up Compile, Build and Test environment
       uses: actions/setup-java@v1
       with:
         java-version: 11
 
-    - name: Compile, Build and Test (Gradle)
+    - name: Compile, Build and Test
       run: ./build.sh
       
-    - name: Code Analysis (Sonar)
+    - name: Code Analysis - SAST (White-box testing)
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: ./codeAnalysis.sh
 
-    - name: Libraries Analysis (Snyk)
+    - name: Libraries Analysis - SAST (White-box testing)
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       run: ./librariesAnalysis.sh
 
-    - name: Packaging (Docker images)
+    - name: Packaging
       run: ./package.sh
 
-    - name: Package Analysis (Snyk)
+    - name: Package Analysis - SAST (White-box testing)
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       run: ./packageAnalysis.sh
 
-    - name: Publishing (Github Packages)
+    - name: Publishing
       env:
-        DOCKER_REGISTRY_URL: ${{ secrets.DOCKER_REGISTRY_URL }}
         DOCKER_REGISTRY_USER: ${{ secrets.DOCKER_REGISTRY_USER }}
         DOCKER_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
       run: ./publish.sh
 
-    - name: Deploy (Kubernetes)
+    - name: Deploy
       env:
         KUBECONFIG_DATA: ${{ secrets.KUBECONFIG_DATA }}
       run: ./deploy.sh

@@ -4,6 +4,9 @@ FROM alpine:latest
 # Define the maintainer of the project.
 LABEL maintainer="fvilarinho@gmail.com"
 
+# Default environment variables.
+ENV MYSQL_ROOT_PASSWORD=demo
+
 # Define the Apache Tomcat version to be used.
 ARG TOMCAT_MAJOR_VERSION=9
 ARG TOMCAT_MINOR_VERSION=0.53

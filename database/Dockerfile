@@ -4,6 +4,9 @@ FROM alpine:latest
 # Define the maintainer of the project.
 LABEL maintainer="fvilarinho@gmail.com"
 
+# Default environment variables.
+ENV MYSQL_ROOT_PASSWORD=demo
+
 # Install essential packages.
 RUN apk update && \
     apk add bash \

@@ -134,7 +134,6 @@ Other Resources
 - [Spring Data JPA](https://docs.spring.io/spring-boot/docs/2.5.4/reference/htmlsingle/#boot-features-jpa-and-spring-data)
 - [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
 - [Accessing Data with JPA](https://spring.io/guides/gs/acce****ssing-data-jpa/)
-- [My LinkedIn Profile](https://www.linkedin.com/in/fvilarinho)
 
 All opinions and standard described here are my own.
 
@@ -142,6 +141,5 @@ That's it! Now enjoy and have fun!
 
 Contact
 -------
-LinkedIn: https://www.linkedin.com/in/fvilarinho
-
-e-Mail: fvilarinho@gmail.com
+- LinkedIn: https://www.linkedin.com/in/fvilarinho
+- e-Mail: fvilarinho@gmail.com

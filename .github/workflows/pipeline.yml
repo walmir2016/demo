@@ -65,7 +65,6 @@ jobs:
 
   notify:
     needs: run
-    runs-on: ubuntu-latest
     steps:
     - name: Notify when fails
       if: always()

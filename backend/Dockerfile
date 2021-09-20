@@ -15,14 +15,8 @@ ARG TOMCAT_VERSION=${TOMCAT_MAJOR_VERSION}.${TOMCAT_MINOR_VERSION}
 # Install essential packages.
 RUN apk update && \
     apk add bash \
-            curl \
-            wget \
-            zip \
-            unzip \
-            vim \
             nss \
-            openjdk11-jre \
-            mariadb-client
+            openjdk11-jre
 
 # Create the default user/group and structure to execute Apache Tomcat.
 RUN addgroup -S group && \

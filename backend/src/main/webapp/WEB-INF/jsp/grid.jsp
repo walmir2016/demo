@@ -1,4 +1,3 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <br/>
 <input type="hidden" id="id" name="id"/>
 <div class="col-md-12">

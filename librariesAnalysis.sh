@@ -1,5 +1,9 @@
 #!/bin/bash
 
-cd backend
+SNYK_CMD=`which snyk`
 
-./gradlew snyk-monitor
+if [ -z "$SNYK_CMD" ]; then
+  SNYK_CMD=./snyk
+fi
+
+$SNYK_CMD test backend

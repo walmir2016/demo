@@ -10,11 +10,6 @@ ENV MYSQL_ROOT_PASSWORD=demo
 # Install essential packages.
 RUN apk update && \
     apk add bash \
-            curl \
-            wget \
-            zip \
-            unzip \
-            vim \
             mariadb \
             mariadb-client \
             nss \

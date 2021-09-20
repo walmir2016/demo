@@ -64,6 +64,8 @@ jobs:
       run: ./deploy.sh
 
   notify:
+    runs-on: ubuntu-latest
+    steps:
     - name: Notify when fails
       if: always()
       uses: ravsamhq/notify-slack-action@master

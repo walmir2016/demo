@@ -6,14 +6,14 @@ if [ -z "$KUBECTL_CMD" ]; then
   KUBECTL_CMD=./kubectl
 fi
 
-if [ ! -z "$KUBECONFIG_DATA" ]; then
+if [ ! -z "$KUBECONFIG_TOKEN" ]; then
   mkdir -p ~/.kube
 
-  echo "$KUBECONFIG_DATA" > ~/.kubeconfig
+  echo "$KUBECONFIG_TOKEN" > ~/.kubeconfig
 
-  KUBECONFIG_DATA=`base64 -d -i ~/.kubeconfig`
+  $KUBECONFIG_TOKEN=`base64 -d -i ~/.kubeconfig`
 
-  echo "$KUBECONFIG_DATA" > ~/.kube/config
+  echo "$KUBECONFIG_TOKEN" > ~/.kube/config
 
   rm ~/.kubeconfig
 fi

@@ -1,5 +1,6 @@
 #!/bin/bash
 
-CATALINA_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n"
+export JPDA_OPTS="$JPDA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:8000"
+export CATALINA_OPTS="$CATALINA_OPTS -javaagent:/home/user/lib/contrast.jar"
 
 /opt/apache-tomcat/bin/catalina.sh jpda run

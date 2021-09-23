@@ -49,7 +49,7 @@ test {
 
 // Build attributes.
 group = "br.com.demo"
-version = "latest"
+version = "devsecops"
 sourceCompatibility = "11"
 
 // Default dependencies repository.

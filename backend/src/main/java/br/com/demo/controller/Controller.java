@@ -17,6 +17,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -54,11 +55,19 @@ public class Controller{
                      @RequestParam(value = "id", required = false) Integer id,
                      @RequestParam(value = "name", required = true) @NotNull @NotBlank(message = "Name is mandatory") String name,
                      @RequestParam(value = "phone", required = true) @NotNull @NotBlank(message = "Phone is mandatory") String phone) throws PhonebookAlreadyExistsException, PhonebookNotFoundException{
-        if(id == null){
-            List<Phonebook> items = service.findByName(name);
+        List<Phonebook> list = service.findByName(name);
         
-            if(items != null && !items.isEmpty())
+        if(id == null || id == 0){
+            if(list != null && !list.isEmpty())
                 throw new PhonebookAlreadyExistsException();
+        }
+        else{
+            if(list != null){
+                Optional<Phonebook> result = list.stream().filter(i -> !i.getId().equals(id) && i.getName().equals(name)).findFirst();
+    
+                if(!result.isEmpty())
+                    throw new PhonebookAlreadyExistsException();
+            }
         }
 
         Phonebook phonebook = new Phonebook();

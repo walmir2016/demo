@@ -59,16 +59,16 @@ repositories {
 
 // List of dependencies.
 dependencies {
-	implementation "org.springframework.boot:spring-boot-starter-data-jpa:2.5.4"
-	implementation "org.springframework.boot:spring-boot-starter-jersey:2.5.4"
-	implementation "org.springframework.boot:spring-boot-starter-web:2.5.4"
+	implementation "org.springframework.boot:spring-boot-starter-data-jpa:2.5.5"
+	implementation "org.springframework.boot:spring-boot-starter-jersey:2.5.5"
+	implementation "org.springframework.boot:spring-boot-starter-web:2.5.5"
 	implementation "org.mariadb.jdbc:mariadb-java-client:2.7.4"
 	implementation "org.glassfish.jersey.core:jersey-common:2.35"
 
-	runtime "org.springframework.boot:spring-boot-starter-tomcat:2.5.4"
+	runtime "org.springframework.boot:spring-boot-starter-tomcat:2.5.5"
 
 	testImplementation "org.mockito:mockito-core:3.12.4"
-	testImplementation "org.springframework.boot:spring-boot-starter-test:2.5.4"
+	testImplementation "org.springframework.boot:spring-boot-starter-test:2.5.5"
 }
 
 // Default test platform.

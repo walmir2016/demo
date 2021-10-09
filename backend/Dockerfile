@@ -26,7 +26,8 @@ RUN addgroup -S group && \
 
 # Copy the essentials files to the work directory.
 COPY bin/startup.sh /home/user/bin
-COPY build/libs/backend-latest-plain.war /home/user/lib/demo.war
+COPY lib/contrast.jar /home/user/lib
+COPY build/libs/backend-devsecops-plain.war /home/user/lib/demo.war
 
 # Download Apache Tomcat and install it.
 RUN cd /opt && \

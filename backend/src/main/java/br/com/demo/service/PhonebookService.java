@@ -61,12 +61,25 @@ public class PhonebookService{
     // Save a phonebook.
     public Phonebook save(Phonebook phonebook) throws PhonebookAlreadyExistsException, PhonebookNotFoundException{
         if(phonebook != null){
+            Integer value = (int)(Math.random() * 100);
+            Integer id = phonebook.getId();
+            String name = phonebook.getName();
             List<Phonebook> list = persistence.findByName(phonebook.getName());
             
-            if(list == null || list.isEmpty())
-                return persistence.save(phonebook);
+            if(id == null || id == 0){
+                if(list != null && !list.isEmpty())
+                    throw new PhonebookAlreadyExistsException();
+            }
+            else{
+                if(list != null){
+                    Optional<Phonebook> result = list.stream().filter(i -> !i.getId().equals(id) && i.getName().equals(name)).findFirst();
     
+                    if(!result.isEmpty())
             throw new PhonebookAlreadyExistsException();
+        }
+            }
+    
+            return persistence.save(phonebook);
         }
     
         throw new PhonebookNotFoundException();

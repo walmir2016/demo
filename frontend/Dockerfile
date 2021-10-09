@@ -7,6 +7,7 @@ LABEL maintainer="fvilarinho@gmail.com"
 # Install essential packages.
 RUN apk update && \
     apk add bash \
+            curl \
             nginx
 
 # Install the required directories.

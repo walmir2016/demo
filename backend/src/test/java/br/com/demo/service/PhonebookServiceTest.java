@@ -136,7 +136,7 @@ class PhonebookServiceTest{
         PhonebookService service = new PhonebookService(persistence);
     
         try{
-            service.save(mockItem);
+            Assertions.assertEquals(service.save(mockItem), mockItem);
         }
         catch(PhonebookNotFoundException e){
             Assertions.assertTrue(false);
@@ -146,9 +146,20 @@ class PhonebookServiceTest{
         }
     
         Mockito.when(persistence.findByName(mockItem.getName())).thenReturn(Collections.EMPTY_LIST);
+        Mockito.when(persistence.save(mockExistingItem)).thenReturn(mockItem);
     
         try{
             Assertions.assertEquals(service.save(mockItem), mockItem);
+        }
+        catch(PhonebookNotFoundException e){
+            Assertions.assertTrue(false);
+        }
+        catch(PhonebookAlreadyExistsException e){
+            Assertions.assertTrue(false);
+        }
+    
+        try{
+            Assertions.assertEquals(service.save(mockExistingItem), mockItem);
         }
         catch(PhonebookNotFoundException e){
             Assertions.assertTrue(false);
@@ -160,7 +171,7 @@ class PhonebookServiceTest{
         Mockito.when(persistence.findByName(mockExistingItem.getName())).thenReturn(mockList);
     
         try{
-            service.save(mockExistingItem);
+            Assertions.assertEquals(service.save(mockExistingItem), mockItem);
         }
         catch(PhonebookNotFoundException e){
             Assertions.assertTrue(false);
@@ -171,6 +182,8 @@ class PhonebookServiceTest{
 
         try{
             service.save(null);
+    
+            Assertions.assertTrue(false);
         }
         catch(PhonebookNotFoundException e){
             Assertions.assertTrue(true);

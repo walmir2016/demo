@@ -1,9 +1,10 @@
 package br.com.demo.service;
 
+import br.com.demo.controller.PhonebookValidator;
 import br.com.demo.exceptions.PhonebookAlreadyExistsException;
 import br.com.demo.exceptions.PhonebookNotFoundException;
-import br.com.demo.persistence.PhonebookPersistence;
 import br.com.demo.model.Phonebook;
+import br.com.demo.persistence.PhonebookPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,23 +62,11 @@ public class PhonebookService{
     // Save a phonebook.
     public Phonebook save(Phonebook phonebook) throws PhonebookAlreadyExistsException, PhonebookNotFoundException{
         if(phonebook != null){
-            Integer value = (int)(Math.random() * 100);
             Integer id = phonebook.getId();
             String name = phonebook.getName();
-            List<Phonebook> list = persistence.findByName(phonebook.getName());
-            
-            if(id == null || id == 0){
-                if(list != null && !list.isEmpty())
-                    throw new PhonebookAlreadyExistsException();
-            }
-            else{
-                if(list != null){
-                    Optional<Phonebook> result = list.stream().filter(i -> !i.getId().equals(id) && i.getName().equals(name)).findFirst();
+            List<Phonebook> list = persistence.findByName(name);
     
-                    if(!result.isEmpty())
-            throw new PhonebookAlreadyExistsException();
-        }
-            }
+            PhonebookValidator.exists(list, id, name);
     
             return persistence.save(phonebook);
         }

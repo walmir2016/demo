@@ -17,7 +17,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -57,18 +56,7 @@ public class Controller{
                      @RequestParam(value = "phone", required = true) @NotNull @NotBlank(message = "Phone is mandatory") String phone) throws PhonebookAlreadyExistsException, PhonebookNotFoundException{
         List<Phonebook> list = service.findByName(name);
         
-        if(id == null || id == 0){
-            if(list != null && !list.isEmpty())
-                throw new PhonebookAlreadyExistsException();
-        }
-        else{
-            if(list != null){
-                Optional<Phonebook> result = list.stream().filter(i -> !i.getId().equals(id) && i.getName().equals(name)).findFirst();
-    
-                if(!result.isEmpty())
-                    throw new PhonebookAlreadyExistsException();
-            }
-        }
+        PhonebookValidator.exists(list, id, name);
 
         Phonebook phonebook = new Phonebook();
         

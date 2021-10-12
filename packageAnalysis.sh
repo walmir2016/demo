@@ -6,7 +6,7 @@ if [ -z "$SNYK_CMD" ]; then
   SNYK_CMD=./snyk
 fi
 
-BUILD_VERSION=`sed 's/BUILD_VERSION=//g' .env`
+BUILD_VERSION=`sed 's/BUILD_VERSION=//g' ./iac/.env`
 
 docker save ghcr.io/fvilarinho/demo-database:$BUILD_VERSION -o demo-database.tar
 

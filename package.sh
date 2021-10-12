@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker-compose build
+docker-compose -f ./iac/docker-compose.yml build

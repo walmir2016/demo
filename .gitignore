@@ -2,4 +2,12 @@
 /.gradle/
 /.idea/
 /backend/build/
-/.env
+/iac/.terraform/
+/iac/.provision.sh.swp
+/iac/.terraform.lock.hcl
+/iac/.terraform.tfstate.lock.info
+/iac/.terraform.tfstate.lock.info
+/iac/terraform.tfstate
+/iac/terraform.tfstate.backup
+/iac/.env
+/iac/.kubeconfig

@@ -42,7 +42,7 @@ if [ -z "$PROVISIONED" ]; then
 
     sed -i -e 's|127.0.0.1|'"$CLUSTER_MANAGER_IP"'|g' ./.kubeconfig
 
-    rm ./.kubeconfig-e
+    rm -f ./.kubeconfig-e
   fi
 
   cp ./kubernetes.yml /tmp/kubernetes.yml
@@ -58,7 +58,7 @@ else
 
     sed -i -e 's|127.0.0.1|'"cluster-manager.$CLOUDFLARE_ZONE_NAME"'|g' ./.kubeconfig
 
-    rm ./.kubeconfig-e
+    rm -f ./.kubeconfig-e
   fi
 
   $KUBECTL_CMD --kubeconfig=./.kubeconfig set image deployment database database=ghcr.io/fvilarinho/demo-database:$BUILD_VERSION

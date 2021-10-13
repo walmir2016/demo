@@ -6,6 +6,12 @@ BUILD_VERSION=`sed 's/BUILD_VERSION=//g' .env`
 PROVISIONED=`dig +short cluster-manager.$CLOUDFLARE_ZONE_NAME`
 KUBECTL_CMD=`which kubectl`
 
+if [ ! -f "./.id_rsa" ]; then
+  echo "$LINODE_PRIVATE_KEY" > ./.id_rsa
+
+  chmod og-rwx ./.id_rsa
+fi
+
 if [ -z "$KUBECTL_CMD" ]; then
   KUBECTL_CMD=./kubectl
 fi
@@ -32,7 +38,7 @@ if [ -z "$PROVISIONED" ]; then
   rm cluster-manager-ip
 
   if [ ! -f "./.kubeconfig" ]; then
-    scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@$CLUSTER_MANAGER_IP:/etc/rancher/k3s/k3s.yaml ./.kubeconfig
+    scp -i ./.id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@$CLUSTER_MANAGER_IP:/etc/rancher/k3s/k3s.yaml ./.kubeconfig
 
     sed -i -e 's|127.0.0.1|'"$CLUSTER_MANAGER_IP"'|g' ./.kubeconfig
 
@@ -48,7 +54,7 @@ if [ -z "$PROVISIONED" ]; then
   rm /tmp/kubernetes.yml
 else
   if [ ! -f "./.kubeconfig" ]; then
-    scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@cluster-manager.${CLOUDFLARE_ZONE_NAME}:/etc/rancher/k3s/k3s.yaml ./.kubeconfig
+    scp -i ./.id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@cluster-manager.${CLOUDFLARE_ZONE_NAME}:/etc/rancher/k3s/k3s.yaml ./.kubeconfig
 
     sed -i -e 's|127.0.0.1|'"cluster-manager.$CLOUDFLARE_ZONE_NAME"'|g' ./.kubeconfig
 

@@ -66,17 +66,17 @@ Environments variables needed in this phase:
 
 ### 7. Deploy
 All commands of this phase are defined in `deploy.sh` file.
-It deploys the package in a K3S (Kubernetes) multi-cloud cluster.
+It deploys the package in a K3S (Kubernetes) cluster.
 The tools/services used are:
+- [`Terraform`](https://terraform.io/) - Infrastructure as a Code tool. 
 - [`kubectl`](https://kubernetes.io/docs/reference/kubectl/overview/) - Kubernetes Orchestration tool. 
 - [`Portainer`](https://portainer.io) - Kubernetes Orchestration Portal.
 - [`Linode`](https://www.linode.com) - Cloud (Newark/USA) where the cluster manager is installed.
-- [`DigitalOcean`](https://www.digitalocean.com) - Cloud (Frankfurt/Germany) where the cluster worker is installed.
+- [`Cloudflare`](https://www.cloudflare.com) - CDN platform used to store DNS entries.
 
 ### 8. DAST (Black-box testing) and RASP (Runtime Application Self-Protection)
 We are doing this phase outside the pipeline but it can be incorporated in the future.
 The tools/services used are:
-- [`Probely`](https://probely.com/) - Services that executes vulnerabilities checks.
 - [`Contrast Security`](https://www.contrastsecurity.com/) - Services that protects and checks vulnerabilities.
 
 Comments
@@ -106,7 +106,7 @@ How to install
 1. Linux operating system.
 2. You need an IDE such as [IntelliJ](https://www.jetbrains.com/pt-br/idea).
 3. You need an account in the following services:
-`GitHub, Sonarcloud, Snyk, Contrast Security and Probely`.
+`GitHub, Sonarcloud, Snyk, Contrast Security`.
 4. You need to set the environment variables described above in you system.
 5. The API Keys for each service must be defined in the UI of each service. Please refer the service documentation.
 6. Fork this project from GitHub.
@@ -117,14 +117,12 @@ How to run locally
 ------------------
 1. In the project directory, execute the scripts below:
 `./build.sh; ./package.sh; docker-compose up`
-2. Remember to rename the packages to use your repository id in all YAML and SH files.
+2. Open the URL `http://localhost` in your preferred browser after the boot.
 
-How to run in the cloud
------------------------
-1. First, you need to create to find a cloud provider with VPS service (Virtual Private Server).
-2. After you provision the VPS and log into, you need to create a Kubernetes cluster using [`k3s`](https://k3s.io). Follow the instructions of the website.
-3. Then, install the [`Portainer`](https://portainer.io) to facilitate the deployment. Follow the instructions of the website.
-4. Once Portainer is running, just create the namespace and the applications on the cluster.
+How to run in the cloud (Linode)
+--------------------------------
+1. Run the `deploy.sh` script that will provision your infrastructure, the kubernetes cluster/orchestration and the application microservices.
+2. Open the URL `http://<linode-ip>:30080` in your preferred browser after the boot.
 
 Other Resources
 ----------------

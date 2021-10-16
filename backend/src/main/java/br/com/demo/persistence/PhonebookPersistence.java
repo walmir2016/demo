@@ -9,7 +9,8 @@ import java.util.List;
 /**
  * Interface that implements the persistence layer (JPA + Hibernate).
  *
- * @author fvilarinho@gmail.com
+ * @author fvilarinho
+ * @version 1.0.0
  */
 @Repository
 public interface PhonebookPersistence extends JpaRepository<Phonebook, Integer>{

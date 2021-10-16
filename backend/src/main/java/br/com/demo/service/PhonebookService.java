@@ -15,6 +15,7 @@ import java.util.Optional;
  * Class that defines the services with the business rules.
  *
  * @author fvilarinho
+ * @version 1.0.0
  */
 @Service
 public class PhonebookService{

@@ -24,8 +24,8 @@ class PhonebookServiceTest{
     private Phonebook mockExistingItem = Mocks.getExistingItem();
     
     // List all data.
-    @Test
-    void list(){
+   // @Test
+/*    void list(){
         Mockito.when(persistence.findAll()).thenReturn(mockList);
     
         PhonebookService service = new PhonebookService(persistence);
@@ -33,6 +33,7 @@ class PhonebookServiceTest{
     
         Assertions.assertEquals(list, mockList);
     }
+    */
     
     // Find a phonebook by id.
     @Test

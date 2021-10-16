@@ -24,6 +24,7 @@ import java.util.logging.Logger;
  * Class that defines the controller of the UI requests.
  *
  * @author fvilarinho
+ * @version 1.0.0
  */
 @org.springframework.stereotype.Controller
 @Validated

@@ -18,7 +18,8 @@ import java.util.Set;
 /**
  * Class that handles the exceptions and violations from the controller.
  *
- * @author fvilarinho@gmail.com
+ * @author fvilarinho
+ * @version 1.0.0
  */
 @ControllerAdvice
 public class PhonebookExceptionHandler{

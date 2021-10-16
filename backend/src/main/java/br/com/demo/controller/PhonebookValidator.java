@@ -10,6 +10,7 @@ import java.util.Optional;
  * Class that implements the validations of a phonebook.
  *
  * @author fvilarinho
+ * @version 1.0.0
  */
 public interface PhonebookValidator{
     //Check if the data exists in a list.

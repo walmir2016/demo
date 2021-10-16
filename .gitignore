@@ -11,3 +11,4 @@
 /iac/terraform.tfstate.backup
 /iac/.env
 /iac/.kubeconfig
+/iac/.id_rsa

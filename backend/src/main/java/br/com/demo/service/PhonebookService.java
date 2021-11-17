@@ -39,9 +39,6 @@ public class PhonebookService{
     
     // Find a phonebook by id.
     public Phonebook findById(Integer id) throws PhonebookNotFoundException{
-        int r = (int)(Math.random() * 100);
-        
-        
         try{
             Optional<Phonebook> result = persistence.findById(id);
     

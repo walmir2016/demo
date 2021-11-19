@@ -8,7 +8,6 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
  *
  * @author fvilarinho
  * @version 1.0.0
- * Teste da pipeline.
  */
 public class ServletInitializer extends SpringBootServletInitializer {
 	@Override

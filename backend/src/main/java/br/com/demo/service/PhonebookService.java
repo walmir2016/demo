@@ -39,12 +39,6 @@ public class PhonebookService{
     
     // Find a phonebook by id.
     public Phonebook findById(Integer id) throws PhonebookNotFoundException{
-        String test = null;
-
-        if(test.equals("Teste do sonar para bug")){
-            System.out.println(1);
-        }
-
         try{
             Optional<Phonebook> result = persistence.findById(id);
     

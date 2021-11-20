@@ -17,6 +17,9 @@ jobs:
       with:
         fetch-depth: 0
 
+    - name: Set up Snyk client
+      run: wget https://github.com/snyk/snyk/releases/download/v1.530.0/snyk-linux; mv ./snyk-linux ./snyk; chmod +x ./snyk;
+
     - name: Set up Terraform client
       run: wget https://releases.hashicorp.com/terraform/1.0.8/terraform_1.0.8_linux_amd64.zip; unzip terraform_1.0.8_linux_amd64.zip; mv terraform ./iac; chmod +x ./iac/terraform; rm terraform_1.0.8_linux_amd64.zip;
 
@@ -30,6 +33,17 @@ jobs:
 
     - name: Compile, Build and Test
       run: ./build.sh
+
+    - name: Code Analysis - SAST (White-box testing)
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: ./codeAnalysis.sh
+
+    - name: Libraries Analysis - SAST (White-box testing)
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      run: ./librariesAnalysis.sh
       
     - name: Packaging
       run: ./package.sh

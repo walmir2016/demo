@@ -48,6 +48,11 @@ jobs:
     - name: Packaging
       run: ./package.sh
 
+    - name: Package Analysis - SAST (White-box testing)
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      run: ./packageAnalysis.sh
+
     - name: Publishing
       env:
         DOCKER_REGISTRY_USER: ${{ secrets.DOCKER_REGISTRY_USER }}

@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
 
 /**
  * Class that defines the data model.
@@ -22,7 +23,16 @@ public class Phonebook{
     @Length(max = 1000)
     private String name = null;
     private String phone = null;
-    
+    private Date birthDate = null;
+
+    public Date getBirthDate() {
+        return this.birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
     public String getName(){
         return name;
     }

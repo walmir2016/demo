@@ -69,8 +69,3 @@ jobs:
         LINODE_PUBLIC_KEY: ${{ secrets.LINODE_PUBLIC_KEY }}
         LINODE_TOKEN: ${{ secrets.LINODE_TOKEN }}
       run: ./deploy.sh
-
-    - name: DAST Analysis (Black-box testing)
-      env:
-        CLOUDFLARE_ZONE_NAME: ${{ secrets.CLOUDFLARE_ZONE_NAME }}
-      run: ./dastAnalysis.sh

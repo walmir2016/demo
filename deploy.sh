@@ -25,13 +25,13 @@ if [ -z "$PROVISIONED" ]; then
 
   $TERRAFORM_CMD init
   $TERRAFORM_CMD apply -auto-approve \
-                       -var "token=$LINODE_TOKEN" \
-                       -var "public_key=$LINODE_PUBLIC_KEY" \
-                       -var "private_key=$LINODE_PRIVATE_KEY" \
-                       -var "email=$CLOUDFLARE_EMAIL" \
-                       -var "api_key=$CLOUDFLARE_API_KEY" \
-                       -var "zone_id=$CLOUDFLARE_ZONE_ID" \
-                       -var "zone_name=$CLOUDFLARE_ZONE_NAME" \
+                       -var "linode_token=$LINODE_TOKEN" \
+                       -var "linode_public_key=$LINODE_PUBLIC_KEY" \
+                       -var "linode_private_key=$LINODE_PRIVATE_KEY" \
+                       -var "cloudflare_email=$CLOUDFLARE_EMAIL" \
+                       -var "cloudflare_api_key=$CLOUDFLARE_API_KEY" \
+                       -var "cloudflare_zone_id=$CLOUDFLARE_ZONE_ID" \
+                       -var "cloudflare_zone_name=$CLOUDFLARE_ZONE_NAME" \
                        -var "datadog_agent_token=$DATADOG_AGENT_TOKEN"
 
   CLUSTER_MANAGER_IP=`cat cluster-manager-ip`

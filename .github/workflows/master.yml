@@ -68,4 +68,5 @@ jobs:
         LINODE_PRIVATE_KEY: ${{ secrets.LINODE_PRIVATE_KEY }}
         LINODE_PUBLIC_KEY: ${{ secrets.LINODE_PUBLIC_KEY }}
         LINODE_TOKEN: ${{ secrets.LINODE_TOKEN }}
+        DATADOG_AGENT_TOKEN: ${{ secrets.DATADOG_AGENT_TOKEN }}
       run: ./deploy.sh

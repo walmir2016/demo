@@ -1,10 +1,11 @@
-variable "token" {}
-variable "public_key" {}
-variable "private_key" {}
-variable "email" {}
-variable "api_key" {}
-variable "zone_id" {}
-variable "zone_name" {}
+variable "linode_token" {}
+variable "linode_public_key" {}
+variable "linode_private_key" {}
+variable "cloudflare_email" {}
+variable "cloudflare_api_key" {}
+variable "cloudflare_zone_id" {}
+variable "cloudflare_zone_name" {}
+variable "datadog_agent_token" {}
 
 resource "random_string" "password" {
   length = 32

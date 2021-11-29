@@ -12,12 +12,12 @@ terraform {
 }
 
 provider "linode" {
-  token = var.token
+  token = var.linode_token
 }
 
 provider "cloudflare" {
-  email   = var.email
-  api_key = var.api_key
+  email   = var.cloudflare_email
+  api_key = var.cloudflare_api_key
 }
 
 resource "linode_instance" "cluster-manager" {
@@ -25,7 +25,7 @@ resource "linode_instance" "cluster-manager" {
   label           = "cluster-manager"
   region          = "us-east"
   type            = "g6-standard-1"
-  authorized_keys = [ var.public_key ]
+  authorized_keys = [ var.linode_public_key ]
   root_pass       = random_string.password.result
 
   provisioner "remote-exec" {
@@ -33,23 +33,29 @@ resource "linode_instance" "cluster-manager" {
       "hostnamectl set-hostname cluster-manager",
       "apt -y update",
       "apt -y install curl wget htop",
-      "export K3S_TOKEN=${var.token}",
+      "export K3S_TOKEN=${var.linode_token}",
       "curl -sfL https://get.k3s.io | sh -",
-      "kubectl apply -n portainer -f https://raw.githubusercontent.com/portainer/k8s/master/deploy/manifests/portainer/portainer-lb.yaml"
+      "kubectl apply -n portainer -f https://raw.githubusercontent.com/portainer/k8s/master/deploy/manifests/portainer/portainer-lb.yaml",
+      "export DD_AGENT_MAJOR_VERSION=7",
+      "export DD_SITE=datadoghq.com",
+      "export DD_API_KEY=${var.datadog_agent_token}",
+      "curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh -o ./install_script.sh",
+      "chmod +x ./install_script.sh",
+      "./install_script.sh"
     ]
 
     connection {
       type        = "ssh"
       user        = "root"
       agent       = false
-      private_key = var.private_key
+      private_key = var.linode_private_key
       host        = self.ip_address
     }
   }
 }
 
 resource "cloudflare_record" "cluster-manager" {
-  zone_id = var.zone_id
+  zone_id = var.cloudflare_zone_id
   name = "cluster-manager"
   value = linode_instance.cluster-manager.ip_address
   type = "A"
@@ -61,7 +67,7 @@ resource "linode_instance" "cluster-worker" {
   label           = "cluster-worker"
   region          = "us-east"
   type            = "g6-standard-1"
-  authorized_keys = [ var.public_key ]
+  authorized_keys = [ var.linode_public_key ]
   root_pass       = random_string.password.result
   depends_on = [ cloudflare_record.cluster-manager ]
 
@@ -70,23 +76,29 @@ resource "linode_instance" "cluster-worker" {
       "hostnamectl set-hostname cluster-worker",
       "apt -y update",
       "apt -y install curl wget htop",
-      "export K3S_TOKEN=${var.token}",
-      "export K3S_URL=https://cluster-manager.${var.zone_name}:6443",
-      "curl -sfL https://get.k3s.io | sh -"
+      "export K3S_TOKEN=${var.linode_token}",
+      "export K3S_URL=https://cluster-manager.${var.cloudflare_zone_name}:6443",
+      "curl -sfL https://get.k3s.io | sh -",
+      "export DD_AGENT_MAJOR_VERSION=7",
+      "export DD_SITE=datadoghq.com",
+      "export DD_API_KEY=${var.datadog_agent_token}",
+      "curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh -o ./install_script.sh",
+      "chmod +x ./install_script.sh",
+      "./install_script.sh"
     ]
 
     connection {
       type        = "ssh"
       user        = "root"
       agent       = false
-      private_key = var.private_key
+      private_key = var.linode_private_key
       host        = self.ip_address
     }
   }
 }
 
 resource "cloudflare_record" "cluster-worker" {
-  zone_id = var.zone_id
+  zone_id = var.cloudflare_zone_id
   name = "cluster-worker"
   value = linode_instance.cluster-worker.ip_address
   type = "A"

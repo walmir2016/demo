@@ -31,20 +31,21 @@ if [ -z "$PROVISIONED" ]; then
                        -var "cloudflare_email=$CLOUDFLARE_EMAIL" \
                        -var "cloudflare_api_key=$CLOUDFLARE_API_KEY" \
                        -var "cloudflare_zone_id=$CLOUDFLARE_ZONE_ID" \
-                       -var "cloudflare_zone_name=$CLOUDFLARE_ZONE_NAME" \
-                       -var "datadog_agent_token=$DATADOG_AGENT_TOKEN"
+                       -var "cloudflare_zone_name=$CLOUDFLARE_ZONE_NAME"
 
   CLUSTER_MANAGER_IP=`cat cluster-manager-ip`
 
   rm cluster-manager-ip
 
-  if [ ! -f "./.kubeconfig" ]; then
-    scp -i ./.id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@$CLUSTER_MANAGER_IP:/etc/rancher/k3s/k3s.yaml ./.kubeconfig
+  scp -i ./.id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@$CLUSTER_MANAGER_IP:/etc/rancher/k3s/k3s.yaml ./.kubeconfig
 
-    sed -i -e 's|127.0.0.1|'"$CLUSTER_MANAGER_IP"'|g' ./.kubeconfig
+  sed -i -e 's|127.0.0.1|'"$CLUSTER_MANAGER_IP"'|g' ./.kubeconfig
 
-    rm -f ./.kubeconfig-e
-  fi
+  rm -f ./.kubeconfig-e
+
+  sed -i -e 's|${DATADOG_AGENT_TOKEN}|'"$DATADOG_AGENT_TOKEN"'|g' ./datadogAgent.sh
+
+  scp -i ./.id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ./datadogAgent.sh root@$CLUSTER_MANAGER_IP:/root
 
   cp ./kubernetes.yml /tmp/kubernetes.yml
 
@@ -54,13 +55,11 @@ if [ -z "$PROVISIONED" ]; then
 
   rm /tmp/kubernetes.yml
 else
-  if [ ! -f "./.kubeconfig" ]; then
-    scp -i ./.id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@cluster-manager.${CLOUDFLARE_ZONE_NAME}:/etc/rancher/k3s/k3s.yaml ./.kubeconfig
+  scp -i ./.id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@cluster-manager.${CLOUDFLARE_ZONE_NAME}:/etc/rancher/k3s/k3s.yaml ./.kubeconfig
 
-    sed -i -e 's|127.0.0.1|'"cluster-manager.$CLOUDFLARE_ZONE_NAME"'|g' ./.kubeconfig
+  sed -i -e 's|127.0.0.1|'"cluster-manager.$CLOUDFLARE_ZONE_NAME"'|g' ./.kubeconfig
 
-    rm -f ./.kubeconfig-e
-  fi
+  rm -f ./.kubeconfig-e
 
   $KUBECTL_CMD --kubeconfig=./.kubeconfig set image deployment database database=ghcr.io/fvilarinho/demo-database:$BUILD_VERSION
   $KUBECTL_CMD --kubeconfig=./.kubeconfig set image daemonset backend backend=ghcr.io/fvilarinho/demo-backend:$BUILD_VERSION

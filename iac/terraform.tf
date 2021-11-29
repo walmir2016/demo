@@ -39,7 +39,7 @@ resource "linode_instance" "cluster-manager" {
       "export DD_AGENT_MAJOR_VERSION=7",
       "export DD_SITE=datadoghq.com",
       "export DD_API_KEY=${var.datadog_agent_token}",
-      "curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh -o ./install_script.sh",
+      "curl https://s3.amazonaws.com/dd-agent/scripts/install_script.sh -o ./install_script.sh",
       "chmod +x ./install_script.sh",
       "./install_script.sh"
     ]
@@ -82,7 +82,7 @@ resource "linode_instance" "cluster-worker" {
       "export DD_AGENT_MAJOR_VERSION=7",
       "export DD_SITE=datadoghq.com",
       "export DD_API_KEY=${var.datadog_agent_token}",
-      "curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh -o ./install_script.sh",
+      "curl https://s3.amazonaws.com/dd-agent/scripts/install_script.sh -o ./install_script.sh",
       "chmod +x ./install_script.sh",
       "./install_script.sh"
     ]

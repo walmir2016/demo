@@ -5,7 +5,6 @@ variable "cloudflare_email" {}
 variable "cloudflare_api_key" {}
 variable "cloudflare_zone_id" {}
 variable "cloudflare_zone_name" {}
-variable "datadog_agent_token" {}
 
 resource "random_string" "password" {
   length = 32

@@ -47,6 +47,8 @@ if [ -z "$PROVISIONED" ]; then
 
   scp -i ./.id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ./datadogAgent.sh root@$CLUSTER_MANAGER_IP:/root
 
+  ssh -i ./.id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@$CLUSTER_MANAGER_IP sh /root/datadogAgent.sh
+
   cp ./kubernetes.yml /tmp/kubernetes.yml
 
   sed -i -e 's|${BUILD_VERSION}|'"$BUILD_VERSION"'|g' /tmp/kubernetes.yml

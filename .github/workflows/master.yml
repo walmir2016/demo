@@ -10,6 +10,7 @@ on:
 
 jobs:
   run:
+    name: Demo Pipeline jobs
     runs-on: ubuntu-latest
     steps:
     - name: Set up Project Files
@@ -46,7 +47,6 @@ jobs:
     - name: Code Analysis - Quality Gate Checking
       uses: jkumar19/sonar-build-breaker@v1.0.0
       with:
-        sonar_branch: ${GITHUB_REF##*/}
         project_key: ${{ secrets.SONAR_PROJECT_KEY }}
         sonar_token: ${{ secrets.SONAR_TOKEN }}
         sonar_url: ${{ secrets.SONAR_URL }}

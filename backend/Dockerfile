@@ -19,16 +19,16 @@ RUN apk update && \
 # Create the default user/group and structure to execute Apache Tomcat.
 RUN addgroup -S group && \
     adduser -S user -G group && \
-    mkdir -p ${LIB_DIR} ${BIN_DIR} \
+    mkdir -p ${LIB_DIR} ${BIN_DIR}
 
 # Copy the essentials files to the work directory.
 COPY bin/startup.sh ${BIN_DIR}
-COPY build/libs/backend-latest.war ${LIB_DIR}/demo.war
+COPY build/libs/backend-*.war ${LIB_DIR}/demo.war
 
 # Set the essentials permissions.
 RUN chown -R user:group ${HOME_DIR} && \
     chmod -R o-rwx ${HOME_DIR} && \
-    chmod u+x ${BIN_DIR}/*.sh
+    chmod u+x ${BIN_DIR}/*.sh && \
     ln -s ${BIN_DIR}/startup.sh /entrypoint.sh
 
 # Set the default user.

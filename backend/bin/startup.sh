@@ -13,7 +13,7 @@ done
 
 # Set debug and RASP environment variables.
 export JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:8000"
+export SERVER_SERVLET_CONTEXT_PATH=/demo
 
 # Startup script in debug mode.
-java $JAVA_OPTS -jar $LIB_
-/opt/apache-tomcat/bin/catalina.sh jpda run
+java $JAVA_OPTS -jar $LIB_DIR/demo.war

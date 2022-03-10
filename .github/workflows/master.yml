@@ -20,7 +20,6 @@ jobs:
 
     - name: Set up Snyk client
       uses: snyk/actions/setup@master
-#      run: wget https://github.com/snyk/snyk/releases/download/v1.530.0/snyk-linux; mv ./snyk-linux ./snyk; chmod +x ./snyk;
 
 #    - name: Set up Terraform client
 #      run: wget https://releases.hashicorp.com/terraform/1.0.8/terraform_1.0.8_linux_amd64.zip; unzip terraform_1.0.8_linux_amd64.zip; mv terraform ./iac; chmod +x ./iac/terraform; rm terraform_1.0.8_linux_amd64.zip;
@@ -58,19 +57,19 @@ jobs:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       run: ./librariesAnalysis.sh
       
-#    - name: Packaging
-#      run: ./package.sh
+    - name: Packaging
+      run: ./package.sh
 
-#    - name: Package Analysis - SAST (White-box testing)
-#      env:
-#        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-#      run: ./packageAnalysis.sh
+    - name: Package Analysis - White-box testing
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      run: ./packageAnalysis.sh
 
-#    - name: Publishing
-#      env:
-#        DOCKER_REGISTRY_USER: ${{ secrets.DOCKER_REGISTRY_USER }}
-#        DOCKER_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
-#      run: ./publish.sh
+    - name: Publishing
+      env:
+        REPOSITORY_USER: ${{ secrets.REPOSITORY_USER }}
+        REPOSITORY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+      run: ./publish.sh
 
 #    - name: Deploy
 #      env:

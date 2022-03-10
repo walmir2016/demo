@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./gradlew sonarqube
+./gradlew sonarqube sonarQualityGateCheck

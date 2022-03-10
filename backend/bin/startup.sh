@@ -12,8 +12,8 @@ while [ true ]; do
 done
 
 # Set debug and RASP environment variables.
-export JPDA_OPTS="$JPDA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:8000"
-export CATALINA_OPTS="$CATALINA_OPTS -javaagent:/home/user/lib/contrast.jar"
+export JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:8000"
 
 # Startup script in debug mode.
+java $JAVA_OPTS -jar $LIB_
 /opt/apache-tomcat/bin/catalina.sh jpda run

@@ -1,8 +1,7 @@
 // Required gradle plugins.
 plugins {
-	id "org.springframework.boot" version "2.5.4"
-	id "io.spring.dependency-management" version "1.0.11.RELEASE"
-	id "org.sonarqube" version "3.1.1"
+	id "org.springframework.boot" version "2.6.4"
+	id "org.sonarqube" version "3.3"
 	id "jacoco"
 	id "java"
 	id "war"
@@ -11,6 +10,7 @@ plugins {
 // Sonarcloud service attributes.
 sonarqube {
 	properties {
+		property "sonar.qualitygate.wait", "true"
 		property "sonar.projectKey", "fvilarinho_demo_backend"
 		property "sonar.organization", "fvilarinho"
 		property "sonar.host.url", "https://sonarcloud.io"
@@ -19,6 +19,27 @@ sonarqube {
 		property 'sonar.exclusions', ["**/ServletInitializer*", "**/DemoApplication*"]
 		property 'sonar.coverage.exclusions', ["**/ServletInitializer*", "**/DemoApplication*"]
 	}
+}
+
+// Build attributes.
+group = "br.com.demo"
+version = System.getenv("BUILD_VERSION")
+
+// Default dependencies repository.
+repositories {
+	mavenCentral()
+}
+
+// List of dependencies.
+dependencies {
+	implementation "org.springframework.boot:spring-boot-starter-data-jpa:2.6.4"
+	implementation "org.springframework.boot:spring-boot-starter-jersey:2.6.4"
+	implementation "org.springframework.boot:spring-boot-starter-web:2.6.4"
+	implementation "org.mariadb.jdbc:mariadb-java-client:3.0.3"
+	implementation "org.glassfish.jersey.core:jersey-common:3.0.4"
+
+	testImplementation "org.mockito:mockito-core:4.4.0"
+	testImplementation "org.springframework.boot:spring-boot-starter-test:2.6.4"
 }
 
 // Sonarcloud task dependencies.
@@ -44,34 +65,6 @@ jacocoTestReport {
 
 // Test task dependencies.
 test {
-	finalizedBy jacocoTestReport
-}
-
-// Build attributes.
-group = "br.com.demo"
-version = "latest"
-sourceCompatibility = "11"
-
-// Default dependencies repository.
-repositories {
-	mavenCentral()
-}
-
-// List of dependencies.
-dependencies {
-	implementation "org.springframework.boot:spring-boot-starter-data-jpa:2.5.5"
-	implementation "org.springframework.boot:spring-boot-starter-jersey:2.5.5"
-	implementation "org.springframework.boot:spring-boot-starter-web:2.5.5"
-	implementation "org.mariadb.jdbc:mariadb-java-client:2.7.4"
-	implementation "org.glassfish.jersey.core:jersey-common:2.35"
-
-	runtime "org.springframework.boot:spring-boot-starter-tomcat:2.5.5"
-
-	testImplementation "org.mockito:mockito-core:3.12.4"
-	testImplementation "org.springframework.boot:spring-boot-starter-test:2.5.5"
-}
-
-// Default test platform.
-test {
 	useJUnitPlatform()
+	finalizedBy jacocoTestReport
 }

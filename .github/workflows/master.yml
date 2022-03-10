@@ -68,7 +68,7 @@ jobs:
     - name: Publishing
       env:
         REPOSITORY_USER: ${{ secrets.REPOSITORY_USER }}
-        REPOSITORY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+        REPOSITORY_PASSWORD: ${{ secrets.REPOSITORY_PASSWORD }}
       run: ./publish.sh
 
 #    - name: Deploy

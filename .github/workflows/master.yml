@@ -76,4 +76,3 @@ jobs:
 #        LINODE_TOKEN: ${{ secrets.LINODE_TOKEN }}
 #        DATADOG_AGENT_TOKEN: ${{ secrets.DATADOG_AGENT_TOKEN }}
 #      run: ./deploy.sh
-W

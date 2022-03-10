@@ -18,7 +18,8 @@ jobs:
       with:
         fetch-depth: 0
 
-#    - name: Set up Snyk client
+    - name: Set up Snyk client
+      uses: snyk/actions/setup@master
 #      run: wget https://github.com/snyk/snyk/releases/download/v1.530.0/snyk-linux; mv ./snyk-linux ./snyk; chmod +x ./snyk;
 
 #    - name: Set up Terraform client
@@ -52,10 +53,10 @@ jobs:
         sonar_token: ${{ secrets.SONAR_TOKEN }}
         sonar_url: ${{ secrets.SONAR_URL }}
 
-#    - name: Libraries Analysis - SAST (White-box testing)
-#      env:
-#        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-#      run: ./librariesAnalysis.sh
+    - name: Libraries Analysis - White-box testing
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      run: ./librariesAnalysis.sh
       
 #    - name: Packaging
 #      run: ./package.sh

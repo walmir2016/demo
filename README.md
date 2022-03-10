@@ -3,7 +3,6 @@ Getting Started
 This is a demo project for education/training purposes of DevOps. All the services used below are in the Cloud to facilitate the understanding.
 The architecture uses microservices and containerization.
 
-[![Develop](https://github.com/fvilarinho/demo/actions/workflows/develop.yml/badge.svg)](https://github.com/fvilarinho/demo/actions/workflows/develop.yml)
 [![Master](https://github.com/fvilarinho/demo/actions/workflows/master.yml/badge.svg)](https://github.com/fvilarinho/demo/actions/workflows/master.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fvilarinho_demo_backend&metric=alert_status)](https://sonarcloud.io/dashboard?id=fvilarinho_demo_backend)
 
@@ -15,7 +14,7 @@ It checks if there are no compile/build errors.
 The tools used are:
 - [`Gradle`](https://www.gradle.org) - Tool to automate the build of the code.
 
-### 2. Code Analysis - SAST (White-box testing)
+### 2. Code Analysis - White-box testing
 All commands of this phase are defined in `codeAnalysis.sh` file. 
 It checks Bugs, Vulnerabilities, Hotspots, Code Smells, Duplications and Coverage of the code.
 If these metrics don't comply with the defined Quality Gate, the pipeline won't continue.
@@ -27,7 +26,7 @@ Environments variables needed in this phase:
 - `GITHUB_TOKEN`: API Key used by Sonar client to communicate with GitHub.
 - `SONAR_TOKEN`: API Key used by Sonar client to store the generated analysis.
 
-### 3. Libraries Analysis - SAST (White-box testing)
+### 3. Libraries Analysis - White-box testing
 All commands of this phase are defined in `librariesAnalysis.sh` file. 
 It checks for vulnerabilities in internal and external libraries used in the code.
 The tools used are:
@@ -44,7 +43,7 @@ Once the code and libraries were checked, it's time build the package to be used
 The tools/services used are:
 - [`Docker Compose`](https://docs.docker.com/compose) - Tool to build the images.
 
-### 5. Package Analysis - SAST (White-box testing)
+### 5. Package Analysis - White-box testing
 All commands of this phase are defined in `packageAnalysis.sh` file.
 It checks for vulnerabilities in the generated package.
 The tools/services used are:
@@ -62,8 +61,8 @@ The tools/services used are:
 - [`GitHub Packages`](https://github.com/features/packages) - Docker registry where the images are stored.
 
 Environments variables needed in this phase:
-- `DOCKER_REGISTRY_USER`: Username of the Docker registry.
-- `DOCKER_REGISTRY_PASSWORD`: Password of the Docker registry.
+- `REPOSITORY_USER`: Username of the repository of packages.
+- `REPOSITORY_PASSWORD`: Password of the repository of packages.
 
 ### 7. Deploy
 All commands of this phase are defined in `deploy.sh` file.
@@ -74,11 +73,6 @@ The tools/services used are:
 - [`Portainer`](https://portainer.io) - Kubernetes Orchestration Portal.
 - [`Linode`](https://www.linode.com) - Cloud (Newark/USA) where the cluster manager is installed.
 - [`Cloudflare`](https://www.cloudflare.com) - CDN platform used to store DNS entries.
-
-### 8. DAST (Black-box testing) and RASP (Runtime Application Self-Protection)
-We are doing this phase outside the pipeline but it can be incorporated in the future.
-The tools/services used are:
-- [`Contrast Security`](https://www.contrastsecurity.com/) - Services that protects and checks vulnerabilities.
 
 Comments
 --------
@@ -107,7 +101,7 @@ How to install
 1. Linux operating system.
 2. You need an IDE such as [IntelliJ](https://www.jetbrains.com/pt-br/idea).
 3. You need an account in the following services:
-`GitHub, Sonarcloud, Snyk, Contrast Security`.
+`GitHub, Sonarcloud, Snyk`.
 4. You need to set the environment variables described above in you system.
 5. The API Keys for each service must be defined in the UI of each service. Please refer the service documentation.
 6. Fork this project from GitHub.

@@ -6,9 +6,9 @@ export BUILD_VERSION=`sed 's/BUILD_VERSION=//g' .env`
 export PROVISIONED=`dig +short cluster-manager.$CLOUDFLARE_ZONE_NAME`
 export KUBECTL_CMD=`which kubectl`
 
-echo "$LINODE_PRIVATE_KEY" > ./.id_rsa
+echo "$LINODE_PRIVATE_KEY" > /tmp/.id_rsa
 
-chmod og-rwx ./.id_rsa
+chmod og-rwx /tmp/.id_rsa
 
 if [ -z "$KUBECTL_CMD" ]; then
   KUBECTL_CMD=./kubectl
@@ -35,11 +35,9 @@ if [ -z "$PROVISIONED" ]; then
 
   rm cluster-manager-ip
 
-  scp -i ./.id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@$CLUSTER_MANAGER_IP:/etc/rancher/k3s/k3s.yaml ./.kubeconfig
+  scp -i /tmp/.id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@$CLUSTER_MANAGER_IP:/etc/rancher/k3s/k3s.yaml ./.kubeconfig
 
   sed -i -e 's|127.0.0.1|'"$CLUSTER_MANAGER_IP"'|g' ./.kubeconfig
-
-  rm -f ./.kubeconfig-e
 
   cp ./kubernetes.yml /tmp/kubernetes.yml
 
@@ -49,17 +47,16 @@ if [ -z "$PROVISIONED" ]; then
 
   rm -d /tmp/kubernetes.yml
 else
-  scp -i ./.id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@cluster-manager.${CLOUDFLARE_ZONE_NAME}:/etc/rancher/k3s/k3s.yaml ./.kubeconfig
+  scp -i /tmp/.id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@cluster-manager.$CLOUDFLARE_ZONE_NAME:/etc/rancher/k3s/k3s.yaml ./.kubeconfig
 
   sed -i -e 's|127.0.0.1|'"cluster-manager.$CLOUDFLARE_ZONE_NAME"'|g' ./.kubeconfig
-
-  rm -f ./.kubeconfig-e
 
   $KUBECTL_CMD --kubeconfig=./.kubeconfig set image deployment database database=ghcr.io/fvilarinho/demo-database:$BUILD_VERSION
   $KUBECTL_CMD --kubeconfig=./.kubeconfig set image daemonset backend backend=ghcr.io/fvilarinho/demo-backend:$BUILD_VERSION
   $KUBECTL_CMD --kubeconfig=./.kubeconfig set image daemonSet frontend frontend=ghcr.io/fvilarinho/demo-frontend:$BUILD_VERSION
 fi
 
-rm -f ./id_rsa
+rm -f ./.kubeconfig*
+rm -f /tmp/.id_rsa
 
 cd ..

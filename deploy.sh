@@ -2,15 +2,13 @@
 
 cd iac
 
-BUILD_VERSION=`sed 's/BUILD_VERSION=//g' .env`
-PROVISIONED=`dig +short cluster-manager.$CLOUDFLARE_ZONE_NAME`
-KUBECTL_CMD=`which kubectl`
+export BUILD_VERSION=`sed 's/BUILD_VERSION=//g' .env`
+export PROVISIONED=`dig +short cluster-manager.$CLOUDFLARE_ZONE_NAME`
+export KUBECTL_CMD=`which kubectl`
 
-if [ ! -f "./.id_rsa" ]; then
-  echo "$LINODE_PRIVATE_KEY" > ./.id_rsa
+echo "$LINODE_PRIVATE_KEY" > ./.id_rsa
 
-  chmod og-rwx ./.id_rsa
-fi
+chmod og-rwx ./.id_rsa
 
 if [ -z "$KUBECTL_CMD" ]; then
   KUBECTL_CMD=./kubectl
@@ -29,9 +27,9 @@ if [ -z "$PROVISIONED" ]; then
                        -var "linode_public_key=$LINODE_PUBLIC_KEY" \
                        -var "linode_private_key=$LINODE_PRIVATE_KEY" \
                        -var "cloudflare_email=$CLOUDFLARE_EMAIL" \
-                       -var "cloudflare_api_key=$CLOUDFLARE_API_KEY" \
-                       -var "cloudflare_zone_id=$CLOUDFLARE_ZONE_ID" \
-                       -var "cloudflare_zone_name=$CLOUDFLARE_ZONE_NAME"
+                        -var "cloudflare_api_key=$CLOUDFLARE_API_KEY" \
+                        -var "cloudflare_zone_id=$CLOUDFLARE_ZONE_ID" \
+                        -var "cloudflare_zone_name=$CLOUDFLARE_ZONE_NAME"
 
   CLUSTER_MANAGER_IP=`cat cluster-manager-ip`
 
@@ -55,7 +53,7 @@ if [ -z "$PROVISIONED" ]; then
 
   $KUBECTL_CMD --kubeconfig=./.kubeconfig apply -f /tmp/kubernetes.yml
 
-  rm /tmp/kubernetes.yml
+  rm -d /tmp/kubernetes.yml
 else
   scp -i ./.id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@cluster-manager.${CLOUDFLARE_ZONE_NAME}:/etc/rancher/k3s/k3s.yaml ./.kubeconfig
 
@@ -67,5 +65,7 @@ else
   $KUBECTL_CMD --kubeconfig=./.kubeconfig set image daemonset backend backend=ghcr.io/fvilarinho/demo-backend:$BUILD_VERSION
   $KUBECTL_CMD --kubeconfig=./.kubeconfig set image daemonSet frontend frontend=ghcr.io/fvilarinho/demo-frontend:$BUILD_VERSION
 fi
+
+rm -f ./id_rsa
 
 cd ..

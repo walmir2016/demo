@@ -21,11 +21,11 @@ jobs:
     - name: Set up Snyk client
       uses: snyk/actions/setup@master
 
-#    - name: Set up Terraform client
-#      run: wget https://releases.hashicorp.com/terraform/1.0.8/terraform_1.0.8_linux_amd64.zip; unzip terraform_1.0.8_linux_amd64.zip; mv terraform ./iac; chmod +x ./iac/terraform; rm terraform_1.0.8_linux_amd64.zip;
+    - name: Set up Terraform client
+      run: wget https://releases.hashicorp.com/terraform/1.0.8/terraform_1.0.8_linux_amd64.zip; unzip terraform_1.0.8_linux_amd64.zip; mv terraform ./iac; chmod +x ./iac/terraform; rm terraform_1.0.8_linux_amd64.zip;
 
-#    - name: Set up Kubernetes client
-#      run: curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"; mv kubectl.sha256 ./iac/kubectl; chmod +x ./iac/kubectl;
+    - name: Set up Kubernetes client
+      run: curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"; mv kubectl.sha256 ./iac/kubectl; chmod +x ./iac/kubectl;
 
     - name: Set up Compile, Build and Test environment
       uses: actions/setup-java@v1
@@ -71,14 +71,13 @@ jobs:
         REPOSITORY_PASSWORD: ${{ secrets.REPOSITORY_PASSWORD }}
       run: ./publish.sh
 
-#    - name: Deploy
-#      env:
-#        CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
-#        CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
-#        CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
-#        CLOUDFLARE_ZONE_NAME: ${{ secrets.CLOUDFLARE_ZONE_NAME }}
-#        LINODE_PRIVATE_KEY: ${{ secrets.LINODE_PRIVATE_KEY }}
-#        LINODE_PUBLIC_KEY: ${{ secrets.LINODE_PUBLIC_KEY }}
-#        LINODE_TOKEN: ${{ secrets.LINODE_TOKEN }}
-#        DATADOG_AGENT_TOKEN: ${{ secrets.DATADOG_AGENT_TOKEN }}
-#      run: ./deploy.sh
+    - name: Deploy
+      env:
+        CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
+        CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
+        CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+        CLOUDFLARE_ZONE_NAME: ${{ secrets.CLOUDFLARE_ZONE_NAME }}
+        LINODE_PRIVATE_KEY: ${{ secrets.LINODE_PRIVATE_KEY }}
+        LINODE_PUBLIC_KEY: ${{ secrets.LINODE_PUBLIC_KEY }}
+        LINODE_TOKEN: ${{ secrets.LINODE_TOKEN }}
+      run: ./deploy.sh

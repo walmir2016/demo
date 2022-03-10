@@ -1,6 +1,7 @@
 variable "linode_token" {}
 variable "linode_public_key" {}
 variable "linode_private_key" {}
+
 variable "cloudflare_email" {}
 variable "cloudflare_api_key" {}
 variable "cloudflare_zone_id" {}

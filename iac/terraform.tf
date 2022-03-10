@@ -97,4 +97,3 @@ resource "local_file" "cluster-manager-ip" {
   content  = linode_instance.cluster-manager.ip_address
   filename = "cluster-manager-ip"
 }
-

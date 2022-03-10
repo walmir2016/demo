@@ -10,10 +10,9 @@ plugins {
 // Sonarcloud service attributes.
 sonarqube {
 	properties {
-		property "sonar.qualitygate.wait", "true"
-		property "sonar.projectKey", "fvilarinho_demo_backend"
-		property "sonar.organization", "fvilarinho"
-		property "sonar.host.url", "https://sonarcloud.io"
+		property "sonar.organization", System.getenv("SONAR_ORGANIZATION")
+		property "sonar.projectKey", System.getenv("SONAR_PROJECT_KEY")
+		property "sonar.host.url", System.getenv("SONAR_URL")
 		property "sonar.sources", "src/main/java,src/main/webapp,src/main/resources/static"
 		property 'sonar.exclusions', "**/ServletInitializer*"
 		property 'sonar.exclusions', ["**/ServletInitializer*", "**/DemoApplication*"]

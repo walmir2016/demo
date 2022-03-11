@@ -35,7 +35,7 @@ jobs:
     - name: Compile, Build and Test
       run: ./build.sh
 
-    - name: Code Analysis - White-box testing
+    - name: Code Analysis - White-box testing (SAST)
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_ORGANIZATION: ${{ secrets.SONAR_ORGANIZATION }}
@@ -52,7 +52,7 @@ jobs:
         sonar_token: ${{ secrets.SONAR_TOKEN }}
         sonar_url: ${{ secrets.SONAR_URL }}
 
-    - name: Libraries Analysis - White-box testing
+    - name: Libraries Analysis - White-box testing (SAST)
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       run: ./librariesAnalysis.sh
@@ -64,7 +64,7 @@ jobs:
         CONTRAST_USER_NAME: ${{ secrets.CONTRAST_USER_NAME }}
       run: ./package.sh
 
-    - name: Package Analysis - White-box testing
+    - name: Package Analysis - White-box testing (SAST)
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       run: ./packageAnalysis.sh
@@ -86,3 +86,8 @@ jobs:
         LINODE_TOKEN: ${{ secrets.LINODE_TOKEN }}
         DATADOG_AGENT_KEY: ${{ secrets.DATADOG_AGENT_KEY }}
       run: ./deploy.sh
+    - name: Black-box testing (DAST)
+      uses: crashtest-security/crashtest-security-action@v1.0.0
+      with:
+        crashtest-webhook: '${{ secrets.CRASHTEST_WEBHOOK }}'
+        pull-report: 'true'

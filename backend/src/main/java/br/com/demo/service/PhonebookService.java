@@ -8,6 +8,8 @@ import br.com.demo.persistence.PhonebookPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +32,15 @@ public class PhonebookService{
         this();
         
         this.persistence = persistence;
+    }
+
+    public void test(){
+        String var = null;
+
+        if(var.equals("Teste"))
+            System.out.println("Nao deveria chegar aqui!");
+
+        int v = (int)Math.random();
     }
     
     // List all data.

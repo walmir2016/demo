@@ -35,7 +35,13 @@ resource "linode_instance" "cluster-manager" {
       "apt -y install curl wget htop",
       "export K3S_TOKEN=${var.linode_token}",
       "curl -sfL https://get.k3s.io | sh -",
-      "kubectl apply -n portainer -f https://raw.githubusercontent.com/portainer/k8s/master/deploy/manifests/portainer/portainer-lb.yaml"
+      "kubectl apply -n portainer -f https://raw.githubusercontent.com/portainer/k8s/master/deploy/manifests/portainer/portainer-lb.yaml",
+      "export DD_AGENT_MAJOR_VERSION=7",
+      "export DD_API_KEY=${var.datadog_agent_key}",
+      "export DD_SITE=datadoghq.com",
+      "curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh -o install_script.sh",
+      "chmod +x ./install_script.sh",
+      "./install_script.sh"
     ]
 
     connection {
@@ -72,7 +78,13 @@ resource "linode_instance" "cluster-worker" {
       "apt -y install curl wget htop",
       "export K3S_TOKEN=${var.linode_token}",
       "export K3S_URL=https://cluster-manager.${var.cloudflare_zone_name}:6443",
-      "curl -sfL https://get.k3s.io | sh -"
+      "curl -sfL https://get.k3s.io | sh -",
+      "export DD_AGENT_MAJOR_VERSION=7",
+      "export DD_API_KEY=${var.datadog_agent_key}",
+      "export DD_SITE=datadoghq.com",
+      "curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh -o ./install_script.sh",
+      "chmod +x ./install_script.sh",
+      "./install_script.sh"
     ]
 
     connection {

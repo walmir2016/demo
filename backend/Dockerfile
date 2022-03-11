@@ -4,8 +4,6 @@ FROM alpine:latest
 # Define the maintainer of the project.
 LABEL maintainer="fvilarinho@gmail.com"
 
-ARG CONTRAST_AGENT_VERSION=3.9.1.25108
-
 # Default environment variables.
 ENV MYSQL_ROOT_PASSWORD=demo
 ENV HOME_DIR=/home/user

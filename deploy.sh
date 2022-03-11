@@ -27,9 +27,10 @@ if [ -z "$PROVISIONED" ]; then
                        -var "linode_public_key=$LINODE_PUBLIC_KEY" \
                        -var "linode_private_key=$LINODE_PRIVATE_KEY" \
                        -var "cloudflare_email=$CLOUDFLARE_EMAIL" \
-                        -var "cloudflare_api_key=$CLOUDFLARE_API_KEY" \
-                        -var "cloudflare_zone_id=$CLOUDFLARE_ZONE_ID" \
-                        -var "cloudflare_zone_name=$CLOUDFLARE_ZONE_NAME"
+                       -var "cloudflare_api_key=$CLOUDFLARE_API_KEY" \
+                       -var "cloudflare_zone_id=$CLOUDFLARE_ZONE_ID" \
+                       -var "cloudflare_zone_name=$CLOUDFLARE_ZONE_NAME" \
+                       -var "datadog_agent_key=$DATADOG_AGENT_KEY"
 
   CLUSTER_MANAGER_IP=`cat cluster-manager-ip`
 

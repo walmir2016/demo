@@ -86,10 +86,3 @@ jobs:
         LINODE_TOKEN: ${{ secrets.LINODE_TOKEN }}
         DATADOG_AGENT_KEY: ${{ secrets.DATADOG_AGENT_KEY }}
       run: ./deploy.sh
-
-    - name: Black-box testing (DAST)
-      id: Crashtest Security
-      uses: crashtest-security/crashtest-security-action@v1.0.0
-      with:
-        crashtest-webhook: ${{ secrets.CRASHTEST_WEBHOOK }}
-        pull-report: 'true'

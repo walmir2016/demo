@@ -58,6 +58,10 @@ jobs:
       run: ./librariesAnalysis.sh
       
     - name: Packaging
+      env:
+        CONTRAST_API_KEY: ${{ secrets.CONTRAST_API_KEY }}
+        CONTRAST_SERVICE_KEY: ${{ secrets.CONTRAST_SERVICE_KEY }}
+        CONTRAST_USER_NAME: ${{ secrets.CONTRAST_USER_NAME }}
       run: ./package.sh
 
     - name: Package Analysis - White-box testing

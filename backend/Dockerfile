@@ -4,26 +4,32 @@ FROM alpine:latest
 # Define the maintainer of the project.
 LABEL maintainer="fvilarinho@gmail.com"
 
+ARG CONTRAST_AGENT_VERSION=3.9.1.25108
+
 # Default environment variables.
 ENV MYSQL_ROOT_PASSWORD=demo
 ENV HOME_DIR=/home/user
+ENV ETC_DIR=${HOME_DIR}/etc
 ENV BIN_DIR=${HOME_DIR}/bin
 ENV LIB_DIR=${HOME_DIR}/lib
+
+# Create the default user/group and structure to execute Apache Tomcat.
+RUN addgroup -S group && \
+    adduser -S user -G group && \
+    mkdir -p ${LIB_DIR} ${BIN_DIR} ${ETC_DIR}
 
 # Install essential packages.
 RUN apk update && \
     apk add bash \
             nss \
-            openjdk11-jre
-
-# Create the default user/group and structure to execute Apache Tomcat.
-RUN addgroup -S group && \
-    adduser -S user -G group && \
-    mkdir -p ${LIB_DIR} ${BIN_DIR}
+            curl \
+            openjdk11-jre && \
+    curl -L 'https://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.contrastsecurity&a=contrast-agent&v=LATEST' -o ${LIB_DIR}/contrast.jar
 
 # Copy the essentials files to the work directory.
 COPY bin/startup.sh ${BIN_DIR}
 COPY build/libs/backend-*.war ${LIB_DIR}/demo.war
+COPY etc/contrast_security.yaml ${ETC_DIR}
 
 # Set the essentials permissions.
 RUN chown -R user:group ${HOME_DIR} && \

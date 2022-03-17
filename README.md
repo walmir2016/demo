@@ -3,18 +3,18 @@ Getting Started
 This is a demo project for education/training purposes of DevOps. All the services used below are in the Cloud to facilitate the understanding.
 The architecture uses microservices and containerization.
 
-[![Master](https://github.com/fvilarinho/demo/actions/workflows/master.yml/badge.svg)](https://github.com/fvilarinho/demo/actions/workflows/master.yml)
+[![Master pipeline](https://github.com/fvilarinho/demo/actions/workflows/master.yml/badge.svg)](https://github.com/fvilarinho/demo/actions/workflows/master.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fvilarinho_demo_backend&metric=alert_status)](https://sonarcloud.io/dashboard?id=fvilarinho_demo_backend)
 
-The pipeline uses [`GitHub Actions`](https://github.com/features/actions) that contains a pipeline with 7 phases described below:
+The pipeline uses [`GitHub Actions`](https://github.com/features/actions) that contains a pipeline with 7 main phases described below:
 
-### 1. Compile, Build and Test
+### Compile, Build and Test
 All commands of this phase are defined in `build.sh` file. 
 It checks if there are no compile/build errors.
 The tools used are:
 - [`Gradle`](https://www.gradle.org) - Tool to automate the build of the code.
 
-### 2. Code Analysis - White-box testing
+### Code Analysis - White-box testing (SAST)
 All commands of this phase are defined in `codeAnalysis.sh` file. 
 It checks Bugs, Vulnerabilities, Hotspots, Code Smells, Duplications and Coverage of the code.
 If these metrics don't comply with the defined Quality Gate, the pipeline won't continue.
@@ -26,7 +26,7 @@ Environments variables needed in this phase:
 - `GITHUB_TOKEN`: API Key used by Sonar client to communicate with GitHub.
 - `SONAR_TOKEN`: API Key used by Sonar client to store the generated analysis.
 
-### 3. Libraries Analysis - White-box testing
+### Libraries Analysis - White-box testing (SAST)
 All commands of this phase are defined in `librariesAnalysis.sh` file. 
 It checks for vulnerabilities in internal and external libraries used in the code.
 The tools used are:
@@ -36,14 +36,20 @@ The tools used are:
 Environments variables needed in this phase:
 - `SNYK_TOKEN`: API Key used by Snyk to store the generated analysis.
 
-### 4. Packaging
+### Packaging
 All commands of this phase are defined in `package.sh` file.
 It encapsulates all binaries in a Docker image.
 Once the code and libraries were checked, it's time build the package to be used in the next phases.
 The tools/services used are:
 - [`Docker Compose`](https://docs.docker.com/compose) - Tool to build the images.
+- [`Contrast Security`](https://www.contrastsecurity.com) - RASP agent.
 
-### 5. Package Analysis - White-box testing
+Environments variables needed in this phase:
+- `CONTRAST_API_KEY`: API Key used to authenticate in Contrast platform.
+- `CONTRAST_SERVICE_KEY`: RASP agent Key used by Contrast platform.
+- `CONTRAST_USER_NAME`: User name used to authenticate in Contrast platform.
+
+### Package Analysis - White-box testing (SAST)
 All commands of this phase are defined in `packageAnalysis.sh` file.
 It checks for vulnerabilities in the generated package.
 The tools/services used are:
@@ -53,12 +59,12 @@ The tools/services used are:
 Environments variables needed in this phase:
 - `SNYK_TOKEN`: API Key used by Snyk to store the generated analysis.
 
-### 6. Publishing
+### Publishing
 All commands of this phase are defined in `publish.sh` file.
 It publishes the package in the Docker registry (GitHub Packages).
 The tools/services used are:
 - [`Docker Compose`](https://docs.docker.com/compose) - Tool to push the images into the Docker registry.
-- [`GitHub Packages`](https://github.com/features/packages) - Docker registry where the images are stored.
+- [`Docker hub`](https://hub.docker.com) - Docker registry where the images are stored.
 
 Environments variables needed in this phase:
 - `REPOSITORY_USER`: Username of the repository of packages.
@@ -68,11 +74,18 @@ Environments variables needed in this phase:
 All commands of this phase are defined in `deploy.sh` file.
 It deploys the package in a K3S (Kubernetes) cluster.
 The tools/services used are:
-- [`Terraform`](https://terraform.io/) - Infrastructure as a Code tool. 
+- [`Terraform`](https://terraform.io) - Infrastructure as a Code platform. 
 - [`kubectl`](https://kubernetes.io/docs/reference/kubectl/overview/) - Kubernetes Orchestration tool. 
-- [`Portainer`](https://portainer.io) - Kubernetes Orchestration Portal.
-- [`Linode`](https://www.linode.com) - Cloud (Newark/USA) where the cluster manager is installed.
-- [`Cloudflare`](https://www.cloudflare.com) - CDN platform used to store DNS entries.
+- [`Portainer`](https://portainer.io) - Kubernetes Orchestration UI.
+- [`Digitalocean`](https://www.digitalocean.com) - Cloud provider where the infrastructure will be provisioned.
+- [`Datadog Agent`](https://www.datadoghq.com) - Monitoring agent.
+
+Environments variables needed in this phase:
+- `DIGITALOCEAN_PRIVATE_KEY`: Private key used to authenticate in the infrastructure.
+- `DIGITALOCEAN_PUBLIC_KEY`: Public key used to be installed in the infrastructure.
+- `DIGITALOCEAN_TOKEN`: Token used to authenticate in the Cloud provider platform.
+- `TERRAFORM_TOKEN`: Token used to authenticate in the Terraform platform.
+- `DATADOG_AGENT_KEY`: API key used to authenticate in the monitoring platform.
 
 Comments
 --------
@@ -108,16 +121,16 @@ How to install
 7. Import the project in IDE.
 8. Commit some changes in the code and follow the execution of the pipeline in GitHub.
 
-How to run locally
+How to run it locally
 ------------------
 1. In the project directory, execute the scripts below:
 `./build.sh; ./package.sh; docker-compose up`
 2. Open the URL `http://localhost` in your preferred browser after the boot.
 
-How to run in the cloud (Linode)
+How to run it in the cloud
 --------------------------------
 1. Run the `deploy.sh` script that will provision your infrastructure, the kubernetes cluster/orchestration and the application microservices.
-2. Open the URL `http://<linode-ip>:30080` in your preferred browser after the boot.
+2. Open the URL `http://<infrastructure-ip>:30080` in your preferred browser after the boot.
 
 Other Resources
 ----------------

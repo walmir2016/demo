@@ -25,7 +25,7 @@ spec:
                     values:
                       - "true"
       containers:
-        - image: felipevilarinho/demo-database:${BUILD_VERSION}
+        - image: ${REPOSITORY_URL}/${REPOSITORY_ID}/demo-database:${DATABASE_BUILD_VERSION}
           imagePullPolicy: Always
           name: database
       dnsPolicy: ClusterFirst
@@ -66,7 +66,7 @@ spec:
         io.portainer.kubernetes.application.name: backend
     spec:
       containers:
-        - image: felipevilarinho/demo-backend:${BUILD_VERSION}
+        - image: ${REPOSITORY_URL}/${REPOSITORY_ID}/demo-backend:${BACKEND_BUILD_VERSION}
           imagePullPolicy: Always
           name: backend
       dnsPolicy: ClusterFirst
@@ -107,7 +107,7 @@ spec:
         io.portainer.kubernetes.application.name: frontend
     spec:
       containers:
-        - image: felipevilarinho/demo-frontend:${BUILD_VERSION}
+        - image: ${REPOSITORY_URL}/${REPOSITORY_ID}/demo-frontend:${FRONTEND_BUILD_VERSION}
           imagePullPolicy: Always
           name: frontend
       dnsPolicy: ClusterFirst

@@ -49,24 +49,29 @@ $TERRAFORM_CMD apply -auto-approve \
 export CLUSTER_MANAGER_IP=$($TERRAFORM_CMD output -raw cluster-manager-ip)
 
 # Get and set the kubernetes settings used to orchestrate the deploy the application.
-scp -i /tmp/.id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@$CLUSTER_MANAGER_IP:/etc/rancher/k3s/k3s.yaml ./.kubeconfig
+scp -i /tmp/.id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@$CLUSTER_MANAGER_IP:/etc/rancher/k3s/k3s.yaml /tmp/.kubeconfig
 
-sed -i -e 's|127.0.0.1|'"$CLUSTER_MANAGER_IP"'|g' ./.kubeconfig
+sed -i -e 's|127.0.0.1|'"$CLUSTER_MANAGER_IP"'|g' /tmp/.kubeconfig
 
 cp ./kubernetes.yml /tmp/kubernetes.yml
 
 # Define the version to be deployed.
-export BUILD_VERSION=`sed 's/BUILD_VERSION=//g' .env`
+DATABASE_BUILD_VERSION=$(md5sum -b /tmp/demo-database.tar | awk '{print $1}')
+BACKEND_BUILD_VERSION=$(md5sum -b /tmp/demo-backend.tar | awk '{print $1}')
+FRONTEND_BUILD_VERSION=$(md5sum -b /tmp/demo-frontend.tar | awk '{print $1}')
 
-sed -i -e 's|${BUILD_VERSION}|'"$BUILD_VERSION"'|g' /tmp/kubernetes.yml
+sed -i -e 's|${REPOSITORY_URL}|'"$REPOSITORY_URL"'|g' /tmp/kubernetes.yml
+sed -i -e 's|${REPOSITORY_ID}|'"$REPOSITORY_ID"'|g' /tmp/kubernetes.yml
+sed -i -e 's|${DATABASE_BUILD_VERSION}|'"$DATABASE_BUILD_VERSION"'|g' /tmp/kubernetes.yml
+sed -i -e 's|${BACKEND_BUILD_VERSION}|'"$BACKEND_BUILD_VERSION"'|g' /tmp/kubernetes.yml
+sed -i -e 's|${FRONTEND_BUILD_VERSION}|'"$FRONTEND_BUILD_VERSION"'|g' /tmp/kubernetes.yml
 
 # Deploy the application.
-$KUBECTL_CMD --kubeconfig=./.kubeconfig apply -f /tmp/kubernetes.yml
+$KUBECTL_CMD --kubeconfig=/tmp/.kubeconfig apply -f /tmp/kubernetes.yml
 
 # Clear temporary files.
-rm -f /tmp/kubernetes.yml
-rm -f ./.kubeconfig*
-rm -f /tmp/.id_rsa
-rm -f ./cluster-manager-ip
+rm -f /tmp/kubernetes.yml*
+rm -f /tmp/.kubeconfig*
+rm -f /tmp/.id_rsa*
 
 cd ..

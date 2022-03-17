@@ -59,6 +59,8 @@ jobs:
       
     - name: 10. Packaging
       env:
+        REPOSITORY_URL: ${{ secrets.REPOSITORY_URL }}
+        REPOSITORY_ID: ${{ secrets.REPOSITORY_ID }}
         CONTRAST_API_KEY: ${{ secrets.CONTRAST_API_KEY }}
         CONTRAST_SERVICE_KEY: ${{ secrets.CONTRAST_SERVICE_KEY }}
         CONTRAST_USER_NAME: ${{ secrets.CONTRAST_USER_NAME }}
@@ -71,12 +73,16 @@ jobs:
 
     - name: 12. Publishing
       env:
+        REPOSITORY_URL: ${{ secrets.REPOSITORY_URL }}
+        REPOSITORY_ID: ${{ secrets.REPOSITORY_ID }}
         REPOSITORY_USER: ${{ secrets.REPOSITORY_USER }}
         REPOSITORY_PASSWORD: ${{ secrets.REPOSITORY_PASSWORD }}
       run: ./publish.sh
 
     - name: 13. Deploy
       env:
+        REPOSITORY_URL: ${{ secrets.REPOSITORY_URL }}
+        REPOSITORY_ID: ${{ secrets.REPOSITORY_ID }}
         DIGITALOCEAN_PRIVATE_KEY: ${{ secrets.DIGITALOCEAN_PRIVATE_KEY }}
         DIGITALOCEAN_PUBLIC_KEY: ${{ secrets.DIGITALOCEAN_PUBLIC_KEY }}
         DIGITALOCEAN_TOKEN: ${{ secrets.DIGITALOCEAN_TOKEN }}

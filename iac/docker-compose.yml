@@ -4,7 +4,7 @@ services:
   database:
     build:
       context: ../database
-    image: felipevilarinho/demo-database:${BUILD_VERSION}
+    image: ${REPOSITORY_URL}/${REPOSITORY_ID}/demo-database:latest
     container_name: database
     hostname: database
     ports:
@@ -15,7 +15,7 @@ services:
   backend:
     build:
       context: ../backend
-    image: felipevilarinho/demo-backend:${BUILD_VERSION}
+    image: ${REPOSITORY_URL}/${REPOSITORY_ID}/demo-backend:latest
     container_name: backend
     hostname: backend
     ports:
@@ -27,7 +27,7 @@ services:
   frontend:
     build:
       context: ../frontend
-    image: felipevilarinho/demo-frontend:${BUILD_VERSION}
+    image: ${REPOSITORY_URL}/${REPOSITORY_ID}/demo-frontend:latest
     container_name: frontend
     hostname: frontend
     ports:

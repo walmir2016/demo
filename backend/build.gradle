@@ -22,7 +22,7 @@ sonarqube {
 
 // Build attributes.
 group = "br.com.demo"
-version = System.getenv("BUILD_VERSION")
+//version = System.getenv("BUILD_VERSION")
 
 // Default dependencies repository.
 repositories {

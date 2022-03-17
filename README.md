@@ -45,6 +45,8 @@ The tools/services used are:
 - [`Contrast Security`](https://www.contrastsecurity.com) - RASP agent.
 
 Environments variables needed in this phase:
+- `REPOSITORY_URL`: URL of the repository of packages.
+- `REPOSITORY_ID`: Identifier of the packages in the repository.
 - `CONTRAST_API_KEY`: API Key used to authenticate in Contrast platform.
 - `CONTRAST_SERVICE_KEY`: RASP agent Key used by Contrast platform.
 - `CONTRAST_USER_NAME`: User name used to authenticate in Contrast platform.
@@ -67,6 +69,8 @@ The tools/services used are:
 - [`Docker hub`](https://hub.docker.com) - Docker registry where the images are stored.
 
 Environments variables needed in this phase:
+- `REPOSITORY_URL`: URL of the repository of packages.
+- `REPOSITORY_ID`: Identifier of the packages in the repository.
 - `REPOSITORY_USER`: Username of the repository of packages.
 - `REPOSITORY_PASSWORD`: Password of the repository of packages.
 
@@ -81,6 +85,8 @@ The tools/services used are:
 - [`Datadog Agent`](https://www.datadoghq.com) - Monitoring agent.
 
 Environments variables needed in this phase:
+- `REPOSITORY_URL`: URL of the repository of packages.
+- `REPOSITORY_ID`: Identifier of the packages in the repository.
 - `DIGITALOCEAN_PRIVATE_KEY`: Private key used to authenticate in the infrastructure.
 - `DIGITALOCEAN_PUBLIC_KEY`: Public key used to be installed in the infrastructure.
 - `DIGITALOCEAN_TOKEN`: Token used to authenticate in the Cloud provider platform.

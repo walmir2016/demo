@@ -34,7 +34,7 @@ resource "digitalocean_droplet" "cluster-manager" {
       "apt -y update",
       "sleep 2",
       "apt -y upgrade",
-      "apt -y install curl wget htop",
+      "apt -y install curl wget htop unzip dnsutils",
       "export K3S_TOKEN=${var.digitalocean_token}",
       "curl -sfL https://get.k3s.io | sh -",
       "kubectl apply -n portainer -f https://raw.githubusercontent.com/portainer/k8s/master/deploy/manifests/portainer/portainer-lb.yaml",

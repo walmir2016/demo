@@ -22,7 +22,7 @@ RUN apk update && \
             nss \
             curl \
             openjdk11-jre && \
-    curl -L 'https://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.contrastsecurity&a=contrast-agent&v=LATEST' -o ${LIB_DIR}/contrast.jar
+    curl -L "https://repo1.maven.org/maven2/com/contrastsecurity/contrast-agent/3.9.1.25108/contrast-agent-3.9.1.25108.jar" -o ${LIB_DIR}/contrast.jar
 
 # Copy the essentials files to the work directory.
 COPY bin/startup.sh ${BIN_DIR}

@@ -77,12 +77,9 @@ jobs:
 
     - name: Deploy
       env:
-        CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
-        CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
-        CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
-        CLOUDFLARE_ZONE_NAME: ${{ secrets.CLOUDFLARE_ZONE_NAME }}
         DIGITALOCEAN_PRIVATE_KEY: ${{ secrets.DIGITALOCEAN_PRIVATE_KEY }}
         DIGITALOCEAN_PUBLIC_KEY: ${{ secrets.DIGITALOCEAN_PUBLIC_KEY }}
         DIGITALOCEAN_TOKEN: ${{ secrets.DIGITALOCEAN_TOKEN }}
+        TERRAFORM_TOKEN: ${{ secrets.TERRAFORM_TOKEN }}
         DATADOG_AGENT_KEY: ${{ secrets.DATADOG_AGENT_KEY }}
       run: ./deploy.sh

@@ -4,7 +4,7 @@ This is a demo project for education/training purposes of DevOps. All the servic
 The architecture uses microservices and containerization.
 
 [![Master pipeline](https://github.com/fvilarinho/demo/actions/workflows/master.yml/badge.svg)](https://github.com/fvilarinho/demo/actions/workflows/master.yml)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fvilarinho_demo_backend&metric=alert_status)](https://sonarcloud.io/dashboard?id=fvilarinho_demo_backend)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fvilarinho_demo&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=fvilarinho_demo)
 
 The pipeline uses [`GitHub Actions`](https://github.com/features/actions) that contains a pipeline with 7 main phases described below:
 
